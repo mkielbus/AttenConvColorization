@@ -3,3 +3,4 @@ venv/**
 data/**
 diagrams_data/**
 diagrams/**
+weights/**
