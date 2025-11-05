@@ -1,0 +1,3 @@
+[submodule "PyAiWrap"]
+	path = git_submodules/PyAiWrap
+	url = git@github.com:mkielbus/PyAiWrap.git
