@@ -177,7 +177,7 @@ if __name__ == "__main__":
         launch_number=args.launch_number,
         visualize_every_xth_epoch=VISUALIZE_EVERY,
         max_patience=PATIENCE,
-        model_type="GAN_gray_to_green",
+        model_type="GAN",
         gradient_clip=GRADIENT_CLIP,
         control_fn=ganControlFunction,
         early_stopping_metric="generator_loss"

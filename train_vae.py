@@ -146,7 +146,7 @@ if __name__ == "__main__":
         launch_number=args.launch_number,
         visualize_every_xth_epoch=VISUALIZE_EVERY,
         max_patience=PATIENCE,
-        model_type="VAE_gray_to_green",
+        model_type="VAE",
         gradient_clip=GRADIENT_CLIP,
         control_fn=vaeControlFunction,
         early_stopping_metric="total_loss"

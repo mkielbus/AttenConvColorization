@@ -1,17 +1,59 @@
 from pyaiwrap.train import train
 from pyaiwrap.config import buildNeuralNetworkFromJson
 from pyaiwrap.datasets import PairedImageFolder
-from pyaiwrap.loss import GeneratorLoss
-from pyaiwrap.metrics import GeneratorMetrics
+from pyaiwrap.loss import GeneratorColorizationLoss
+from pyaiwrap.metrics import GeneratorColorizationMetrics
 from pyaiwrap.control import generatorControlFunction
 from pyaiwrap.generator import loadHyperparameters
-from pyaiwrap.transforms import ToGrayscale, ExtractGreenChannelTo3Channel
+from pyaiwrap.transforms import ToGrayscale, ExtractRedChannelTo3Channel, ExtractGreenChannelTo3Channel, \
+     ExtractBlueChannelTo3Channel
 from pyaiwrap.utils import prepareDevice
 import torch
 import torch.nn as nn
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 import argparse
+from typing import Tuple
+import warnings
+warnings.filterwarnings('ignore', category=UserWarning, module='torchvision')
+
+
+def getTargetChannelTransform(target_channel: str, image_size: int) -> Tuple[transforms.Compose, str]:
+    """
+    Get the appropriate transform for the target color channel.
+
+    Args:
+        target_channel: Channel to extract ("R", "G", or "B")
+        image_size: Size to resize images to
+
+    Returns:
+        Tuple of (transform, channel_format_string)
+
+    Raises:
+        ValueError: If target_channel is not "R", "G", or "B"
+    """
+    if target_channel == "R":
+        transform = transforms.Compose([
+            transforms.Resize((image_size, image_size)),
+            ExtractRedChannelTo3Channel()
+        ])
+        channel_format = "[red_values, 0, 0]"
+    elif target_channel == "G":
+        transform = transforms.Compose([
+            transforms.Resize((image_size, image_size)),
+            ExtractGreenChannelTo3Channel()
+        ])
+        channel_format = "[0, green_values, 0]"
+    elif target_channel == "B":
+        transform = transforms.Compose([
+            transforms.Resize((image_size, image_size)),
+            ExtractBlueChannelTo3Channel()
+        ])
+        channel_format = "[0, 0, blue_values]"
+    else:
+        raise ValueError(f"TARGET_CHANNEL must be 'R', 'G', or 'B', got '{target_channel}'")
+
+    return transform, channel_format
 
 
 def parseCMDArgs():
@@ -28,8 +70,7 @@ def parseCMDArgs():
         type=int,
         required=False,
         default=0,
-        help="The number of the training process launch with the same hyperparams file (increase it for subsequent runs\
-with the same hyperparams file)."
+        help="The number of the training process launch with the same hyperparams file (increase it for subsequent runs with the same hyperparams file)."
     )
     args = parser.parse_args()
     return args
@@ -56,50 +97,85 @@ if __name__ == "__main__":
     DIAGRAMS_PATH = hyperparams["DIAGRAMS_PATH"]
     VISUALIZE_EVERY = hyperparams["VISUALIZE_EVERY"]
     GRADIENT_CLIP = hyperparams["GRADIENT_CLIP"]
+    PERCEPTUAL_WEIGHT = hyperparams["PERCEPTUAL_WEIGHT"]
+    COLORFULNESS_WEIGHT = hyperparams["COLORFULNESS_WEIGHT"]
+    COLORFULNESS_TARGET = hyperparams["COLORFULNESS_TARGET"]
+    USE_LPIPS = hyperparams["USE_LPIPS"]
+    LPIPS_NET = hyperparams["LPIPS_NET"]
+    TARGET_CHANNEL = hyperparams["TARGET_CHANNEL"]
 
-    # Transform for grayscale: resize -> grayscale (3 channels, same values) -> tensor
-    transform_grayscale = transforms.Compose([
+    print("Training Configuration")
+    print(f"Hyperparams ID: {HYPERPARAMS_ID}")
+    print(f"Architecture ID: {ARCHITECTURE_ID}")
+    print(f"Launch Number: {args.launch_number}")
+    print(f"Target Channel: {TARGET_CHANNEL}")
+    print(f"Batch Size: {BATCH_SIZE}")
+    print(f"Image Size: {IMAGE_RESIZE}")
+    print(f"Input Channels: {INPUT_CHANNELS}")
+    print(f"Learning Rate: {LEARNING_RATE}")
+    print(f"Epochs: {EPOCHS}")
+    print(f"Patience: {PATIENCE}")
+    print(f"Gradient Clip: {GRADIENT_CLIP}")
+    print("\nLoss Configuration:")
+    print(f"  Perceptual Weight: {PERCEPTUAL_WEIGHT}")
+    print(f"  Use LPIPS: {USE_LPIPS}")
+    if USE_LPIPS:
+        print(f"  LPIPS Network: {LPIPS_NET}")
+    print(f"  Colorfulness Weight: {COLORFULNESS_WEIGHT}")
+    if COLORFULNESS_TARGET is not None:
+        print(f"  Colorfulness Target: {COLORFULNESS_TARGET}")
+    else:
+        print("  Colorfulness Target: Match Original")
+
+    transform_luminance = transforms.Compose([
         transforms.Resize((IMAGE_RESIZE, IMAGE_RESIZE)),
-        ToGrayscale(num_output_channels=3),  # 3 channels with same grayscale values
-        transforms.ToTensor()                 # Convert to tensor: (3, H, W)
+        ToGrayscale(num_output_channels=INPUT_CHANNELS),
+        transforms.ToTensor()
     ])
 
-    # Transform for green channel: resize -> extract green to 3-channel (only green populated)
-    transform_green_channel = transforms.Compose([
-        transforms.Resize((IMAGE_RESIZE, IMAGE_RESIZE)),
-        ExtractGreenChannelTo3Channel()  # Creates (3, H, W) with [0, green, 0]
-    ])
+    transform_target_channel, channel_format = getTargetChannelTransform(TARGET_CHANNEL, IMAGE_RESIZE)
 
     train_dataset = PairedImageFolder(
         TRAIN_DATA_PATH,
-        input_transform=transform_grayscale,      # Input: grayscale (3, H, W)
-        target_transform=transform_green_channel  # Target: green channel (3, H, W)
+        input_transform=transform_luminance,
+        target_transform=transform_target_channel
     )
     validation_dataset = PairedImageFolder(
         VALIDATION_DATA_PATH,
-        input_transform=transform_grayscale,      # Input: grayscale (3, H, W)
-        target_transform=transform_green_channel  # Target: green channel (3, H, W)
+        input_transform=transform_luminance,
+        target_transform=transform_target_channel
     )
+
+    print(f"Training samples: {len(train_dataset)}")
+    print(f"Validation samples: {len(validation_dataset)}\n")
 
     train_loader = DataLoader(
         train_dataset,
         batch_size=BATCH_SIZE,
         shuffle=True,
         drop_last=True,
-        pin_memory=True
+        pin_memory=True,
+        num_workers=4
     )
     validation_loader = DataLoader(
         validation_dataset,
         batch_size=BATCH_SIZE,
         shuffle=False,
         drop_last=True,
-        pin_memory=True
+        pin_memory=True,
+        num_workers=4
     )
 
+    print("Building generator model...")
     generator = buildNeuralNetworkFromJson(
         f"./network_architectures/generators/{ARCHITECTURE_ID}.json"
     )
     generator = generator.to(device)
+
+    total_params = sum(p.numel() for p in generator.parameters())
+    trainable_params = sum(p.numel() for p in generator.parameters() if p.requires_grad)
+    print(f"Total parameters: {total_params:,}")
+    print(f"Trainable parameters: {trainable_params:,}\n")
 
     models = {'generator': generator}
 
@@ -109,10 +185,19 @@ if __name__ == "__main__":
     scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer=optimizer, gamma=GAMMA)
     schedulers = {'generator': scheduler}
 
-    loss_fn = GeneratorLoss(reconstruction_loss_fn=nn.MSELoss(), use_lpips=True, perceptual_weight=1.0, device=device)
+    loss_fn = GeneratorColorizationLoss(
+        reconstruction_loss_fn=nn.MSELoss(),
+        perceptual_weight=PERCEPTUAL_WEIGHT,
+        colorfulness_weight=COLORFULNESS_WEIGHT,
+        colorfulness_target=COLORFULNESS_TARGET,
+        use_lpips=USE_LPIPS,
+        lpips_net=LPIPS_NET,
+        device=device
+    )
 
-    metrics = GeneratorMetrics()
+    metrics = GeneratorColorizationMetrics()
 
+    print("Starting training...\n")
     result = train(
         models=models,
         train_loader=train_loader,
@@ -130,16 +215,40 @@ if __name__ == "__main__":
         launch_number=args.launch_number,
         visualize_every_xth_epoch=VISUALIZE_EVERY,
         max_patience=PATIENCE,
-        model_type="ViT_gray_to_green",
+        model_type="custom",
         gradient_clip=GRADIENT_CLIP,
         control_fn=generatorControlFunction,
         early_stopping_metric="total_loss"
     )
 
-    print("\nTraining completed!")
-    print("Task: Grayscale (3ch) → Green Channel (3ch) Reconstruction")
+    print("Training Completed!")
+    print(f"Task: Luminance (1ch) → {TARGET_CHANNEL} Channel (3ch) Colorization")
+    print("Input format: [luminance]")
+    print(f"Target format: {channel_format}")
+
     history = metrics.getHistoryLists()
-    print(f"Final train loss: {history['train_losses'][-1]:.6f}")
-    print(f"Final val loss: {history['val_losses'][-1]:.6f}")
-    print(f"Best val loss: {min(history['val_losses']):.6f}")
-    print(f"Total epochs trained: {result['epochs_trained']}")
+
+    print("\nFinal Metrics:")
+    print(f"  Train Total Loss: {history['train_total_loss'][-1]:.6f}")
+    print(f"  Val Total Loss: {history['val_total_loss'][-1]:.6f}")
+    print(f"  Best Val Loss: {min(history['val_total_loss']):.6f}")
+
+    if PERCEPTUAL_WEIGHT > 0 and history['val_perceptual_loss'][-1] > 1e-6:
+        print("\nPerceptual Loss:")
+        print(f"  Train: {history['train_perceptual_loss'][-1]:.6f}")
+        print(f"  Val: {history['val_perceptual_loss'][-1]:.6f}")
+
+    if COLORFULNESS_WEIGHT > 0 and history['val_colorfulness_loss'][-1] > 1e-6:
+        print("\nColorfulness Metrics:")
+        print(f"  Train Colorfulness Loss: {history['train_colorfulness_loss'][-1]:.6f}")
+        print(f"  Val Colorfulness Loss: {history['val_colorfulness_loss'][-1]:.6f}")
+        print(f"  Final Reconstructed: {history['val_colorfulness_recon'][-1]:.2f}")
+        print(f"  Final Original: {history['val_colorfulness_original'][-1]:.2f}")
+
+    print(f"\nTotal epochs trained: {result['epochs_trained']}")
+    print(f"Early stopping triggered: {result.get('early_stopped', False)}")
+    print(f"Final learning rate: {optimizer.param_groups[0]['lr']:.2e}")
+
+    print(f"Model saved to: {WEIGHTS_PATH}")
+    print(f"Metrics saved to: {DIAGRAMS_DATA_PATH}")
+    print(f"Visualizations saved to: {DIAGRAMS_PATH}")
