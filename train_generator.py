@@ -195,7 +195,8 @@ if __name__ == "__main__":
         device=device
     )
 
-    metrics = GeneratorColorizationMetrics(use_colorfulness=COLORFULNESS_WEIGHT > 0)
+    metrics = GeneratorColorizationMetrics(use_colorfulness=COLORFULNESS_WEIGHT > 0,
+                                           use_perceptual_loss=PERCEPTUAL_WEIGHT > 0)
 
     print("Starting training...\n")
     result = train(
