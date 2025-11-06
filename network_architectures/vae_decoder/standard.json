@@ -1,0 +1,21 @@
+[
+    {"type": "Linear", "params": {"in_features": 512, "out_features": 65536}},
+    {"type": "LeakyReLU", "params": {"negative_slope": 0.2, "inplace": true}},
+    
+    {"type": "Unflatten", "params": {"dim": 1, "unflattened_size": [256, 16, 16]}},
+    
+    {"type": "ConvTranspose2d", "params": {"in_channels": 256, "out_channels": 128, "kernel_size": 4, "stride": 2, "padding": 1}},
+    {"type": "BatchNorm2d", "params": {"num_features": 128}},
+    {"type": "LeakyReLU", "params": {"negative_slope": 0.2, "inplace": true}},
+    
+    {"type": "ConvTranspose2d", "params": {"in_channels": 128, "out_channels": 64, "kernel_size": 4, "stride": 2, "padding": 1}},
+    {"type": "BatchNorm2d", "params": {"num_features": 64}},
+    {"type": "LeakyReLU", "params": {"negative_slope": 0.2, "inplace": true}},
+    
+    {"type": "ConvTranspose2d", "params": {"in_channels": 64, "out_channels": 32, "kernel_size": 4, "stride": 2, "padding": 1}},
+    {"type": "BatchNorm2d", "params": {"num_features": 32}},
+    {"type": "LeakyReLU", "params": {"negative_slope": 0.2, "inplace": true}},
+    
+    {"type": "ConvTranspose2d", "params": {"in_channels": 32, "out_channels": 3, "kernel_size": 4, "stride": 2, "padding": 1}},
+    {"type": "Sigmoid", "params": {}}
+]

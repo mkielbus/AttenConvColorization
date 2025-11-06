@@ -2,17 +2,19 @@
     "BATCH_SIZE": 50,
     "TRAIN_DATA_PATH": "./data/DIV2K_train_LR_bicubic/X4",
     "VALIDATION_DATA_PATH": "./data/DIV2K_valid_LR_bicubic/X4",
-    "HYPERPARAMS_ID": "vit_256_channel_extraction",
-    "ARCHITECTURE_ID": "vit_256_channel_extraction",
+    "HYPERPARAMS_ID": "standard",
+    "ARCHITECTURE_ID": "standard",
     "LEARNING_RATE": 0.0001,
     "GAMMA": 0.95,
+    "LATENT_DIM": 128,
     "IMAGE_RESIZE": 256,
-    "INPUT_CHANNELS": 1,
+    "INPUT_CHANNELS": 3,
     "EPOCHS": 100,
     "DIAGRAMS_DATA_PATH": "./diagrams_data",
     "WEIGHTS_PATH": "./weights",
+    "KL_BETA": 0.01,
     "PATIENCE": 15,
     "DIAGRAMS_PATH": "./diagrams",
     "VISUALIZE_EVERY": 5,
-    "GRADIENT_CLIP": 5.0
+    "GRADIENT_CLIP": 1.0
 }

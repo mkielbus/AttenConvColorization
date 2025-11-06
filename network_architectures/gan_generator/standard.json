@@ -1,0 +1,26 @@
+[
+    {"type": "Conv2d", "params": {"in_channels": 3, "out_channels": 32, "kernel_size": 7, "stride": 1, "padding": 3}},
+    {"type": "InstanceNorm2d", "params": {"num_features": 32}},
+    {"type": "ReLU", "params": {"inplace": true}},
+    
+    {"type": "Conv2d", "params": {"in_channels": 32, "out_channels": 64, "kernel_size": 3, "stride": 2, "padding": 1}},
+    {"type": "InstanceNorm2d", "params": {"num_features": 64}},
+    {"type": "ReLU", "params": {"inplace": true}},
+    
+    {"type": "Conv2d", "params": {"in_channels": 64, "out_channels": 128, "kernel_size": 3, "stride": 2, "padding": 1}},
+    {"type": "InstanceNorm2d", "params": {"num_features": 128}},
+    {"type": "ReLU", "params": {"inplace": true}},
+    
+    {"type": "ImageTransformerBlock", "params": {"channels": 128, "num_heads": 4, "mlp_ratio": 2, "dropout": 0.0, "use_self_attention": true, "use_causal_mask": false}},
+    
+    {"type": "ConvTranspose2d", "params": {"in_channels": 128, "out_channels": 64, "kernel_size": 4, "stride": 2, "padding": 1}},
+    {"type": "InstanceNorm2d", "params": {"num_features": 64}},
+    {"type": "ReLU", "params": {"inplace": true}},
+    
+    {"type": "ConvTranspose2d", "params": {"in_channels": 64, "out_channels": 32, "kernel_size": 4, "stride": 2, "padding": 1}},
+    {"type": "InstanceNorm2d", "params": {"num_features": 32}},
+    {"type": "ReLU", "params": {"inplace": true}},
+    
+    {"type": "Conv2d", "params": {"in_channels": 32, "out_channels": 3, "kernel_size": 7, "stride": 1, "padding": 3}},
+    {"type": "Tanh", "params": {}}
+]
