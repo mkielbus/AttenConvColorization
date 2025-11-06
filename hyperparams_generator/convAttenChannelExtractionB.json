@@ -14,7 +14,7 @@
     "PATIENCE": 15,
     "DIAGRAMS_PATH": "./diagrams",
     "VISUALIZE_EVERY": 5,
-    "GRADIENT_CLIP": 5.0,
+    "GRADIENT_CLIP": 2.0,
     "PERCEPTUAL_WEIGHT": 1.0,
     "USE_LPIPS": true,
     "LPIPS_NET": "alex",
