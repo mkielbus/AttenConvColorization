@@ -157,8 +157,10 @@ if __name__ == "__main__":
     print("Input format: [gray, gray, gray]")
     print("Target format: [0, green_values, 0]")
     print(f"Latent dim: {LATENT_DIM}, KL beta: {KL_BETA}")
+
     history = metrics.getHistoryLists()
-    print(f"Final train loss: {history['train_total_losses'][-1]:.6f}")
-    print(f"Final val loss: {history['val_total_losses'][-1]:.6f}")
-    print(f"Best val loss: {min(history['val_total_losses']):.6f}")
+
+    print(f"Final train loss: {history['train_total_loss'][-1]:.6f}")
+    print(f"Final val loss: {history['val_total_loss'][-1]:.6f}")
+    print(f"Best val loss: {min(history['val_total_loss']):.6f}")
     print(f"Total epochs trained: {result['epochs_trained']}")

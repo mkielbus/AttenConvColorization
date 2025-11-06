@@ -187,9 +187,11 @@ if __name__ == "__main__":
     print("Task: GAN Grayscale (3ch) → Green Channel (3ch)")
     print("Input format: [gray, gray, gray]")
     print("Target format: [0, green_values, 0]")
+
     history = metrics.getHistoryLists()
-    print(f"Final train G loss: {history['generator_train_losses'][-1]:.6f}")
-    print(f"Final train D loss: {history['discriminator_train_losses'][-1]:.6f}")
-    print(f"Final val G loss: {history['generator_val_losses'][-1]:.6f}")
-    print(f"Final val D loss: {history['discriminator_val_losses'][-1]:.6f}")
+
+    print(f"Final train G loss: {history['train_generator_loss'][-1]:.6f}")
+    print(f"Final train D loss: {history['train_discriminator_loss'][-1]:.6f}")
+    print(f"Final val G loss: {history['val_generator_loss'][-1]:.6f}")
+    print(f"Final val D loss: {history['val_discriminator_loss'][-1]:.6f}")
     print(f"Total epochs trained: {result['epochs_trained']}")

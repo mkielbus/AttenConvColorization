@@ -233,12 +233,12 @@ if __name__ == "__main__":
     print(f"  Val Total Loss: {history['val_total_loss'][-1]:.6f}")
     print(f"  Best Val Loss: {min(history['val_total_loss']):.6f}")
 
-    if PERCEPTUAL_WEIGHT > 0 and history['val_perceptual_loss'][-1] > 1e-6:
+    if PERCEPTUAL_WEIGHT > 0:
         print("\nPerceptual Loss:")
         print(f"  Train: {history['train_perceptual_loss'][-1]:.6f}")
         print(f"  Val: {history['val_perceptual_loss'][-1]:.6f}")
 
-    if COLORFULNESS_WEIGHT > 0 and history['val_colorfulness_loss'][-1] > 1e-6:
+    if COLORFULNESS_WEIGHT > 0:
         print("\nColorfulness Metrics:")
         print(f"  Train Colorfulness Loss: {history['train_colorfulness_loss'][-1]:.6f}")
         print(f"  Val Colorfulness Loss: {history['val_colorfulness_loss'][-1]:.6f}")
