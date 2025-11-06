@@ -18,7 +18,7 @@
     "PERCEPTUAL_WEIGHT": 1.0,
     "USE_LPIPS": true,
     "LPIPS_NET": "alex",
-    "COLORFULNESS_WEIGHT": 1.0,
+    "COLORFULNESS_WEIGHT": 0.0,
     "COLORFULNESS_TARGET": null,
     "TARGET_CHANNEL": "B"
 }
