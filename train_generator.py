@@ -7,6 +7,7 @@ from pyaiwrap.control import generatorControlFunction
 from pyaiwrap.generator import loadHyperparameters
 from pyaiwrap.transforms import ToGrayscale, ExtractRedChannelTo3Channel, ExtractGreenChannelTo3Channel, \
      ExtractBlueChannelTo3Channel
+from pyaiwrap.neural_network import ConvAttenColorizationNetwork
 from pyaiwrap.utils import prepareDevice
 import torch
 import torch.nn as nn
@@ -18,21 +19,29 @@ import warnings
 warnings.filterwarnings('ignore', category=UserWarning, module='torchvision')
 
 
-def getTargetChannelTransform(target_channel: str, image_size: int) -> Tuple[transforms.Compose, str]:
+def getTargetChannelTransform(target_channel: str, image_size: int, has_submodules: bool) -> Tuple[transforms.Compose,
+                                                                                                   str]:
     """
     Get the appropriate transform for the target color channel.
 
     Args:
-        target_channel: Channel to extract ("R", "G", or "B")
+        target_channel: Channel to extract ("R", "G", "B", or "RGB")
         image_size: Size to resize images to
+        has_submodules: Whether SUBMODULES is not empty
 
     Returns:
         Tuple of (transform, channel_format_string)
 
     Raises:
-        ValueError: If target_channel is not "R", "G", or "B"
+        ValueError: If target_channel is not "R", "G", "B", or "RGB"
     """
-    if target_channel == "R":
+    if has_submodules:
+        transform = transforms.Compose([
+            transforms.Resize((image_size, image_size)),
+            transforms.ToTensor()
+        ])
+        channel_format = "[red_values, green_values, blue_values]"
+    elif target_channel == "R":
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
             ExtractRedChannelTo3Channel()
@@ -51,7 +60,7 @@ def getTargetChannelTransform(target_channel: str, image_size: int) -> Tuple[tra
         ])
         channel_format = "[0, 0, blue_values]"
     else:
-        raise ValueError(f"TARGET_CHANNEL must be 'R', 'G', or 'B', got '{target_channel}'")
+        raise ValueError(f"TARGET_CHANNEL must be 'R', 'G', or 'B' when no submodules, got '{target_channel}'")
 
     return transform, channel_format
 
@@ -70,7 +79,8 @@ def parseCMDArgs():
         type=int,
         required=False,
         default=0,
-        help="The number of the training process launch with the same hyperparams file (increase it for subsequent runs with the same hyperparams file)."
+        help="The number of the training process launch with the same hyperparams file (increase it for subsequent runs\
+with the same hyperparams file)."
     )
     args = parser.parse_args()
     return args
@@ -88,6 +98,7 @@ if __name__ == "__main__":
     INPUT_CHANNELS = hyperparams["INPUT_CHANNELS"]
     HYPERPARAMS_ID = hyperparams["HYPERPARAMS_ID"]
     ARCHITECTURE_ID = hyperparams["ARCHITECTURE_ID"]
+    SUBMODULES = hyperparams.get("SUBMODULES", {})
     EPOCHS = hyperparams["EPOCHS"]
     DIAGRAMS_DATA_PATH = hyperparams["DIAGRAMS_DATA_PATH"]
     WEIGHTS_PATH = hyperparams["WEIGHTS_PATH"]
@@ -104,11 +115,14 @@ if __name__ == "__main__":
     LPIPS_NET = hyperparams["LPIPS_NET"]
     TARGET_CHANNEL = hyperparams["TARGET_CHANNEL"]
 
+    has_submodules = bool(SUBMODULES)
+
     print("Training Configuration")
     print(f"Hyperparams ID: {HYPERPARAMS_ID}")
     print(f"Architecture ID: {ARCHITECTURE_ID}")
     print(f"Launch Number: {args.launch_number}")
     print(f"Target Channel: {TARGET_CHANNEL}")
+    print(f"Has Submodules: {has_submodules}")
     print(f"Batch Size: {BATCH_SIZE}")
     print(f"Image Size: {IMAGE_RESIZE}")
     print(f"Input Channels: {INPUT_CHANNELS}")
@@ -133,7 +147,7 @@ if __name__ == "__main__":
         transforms.ToTensor()
     ])
 
-    transform_target_channel, channel_format = getTargetChannelTransform(TARGET_CHANNEL, IMAGE_RESIZE)
+    transform_target_channel, channel_format = getTargetChannelTransform(TARGET_CHANNEL, IMAGE_RESIZE, has_submodules)
 
     train_dataset = PairedImageFolder(
         TRAIN_DATA_PATH,
@@ -167,9 +181,15 @@ if __name__ == "__main__":
     )
 
     print("Building generator model...")
-    generator = buildNeuralNetworkFromJson(
-        f"./network_architectures/generators/{ARCHITECTURE_ID}.json"
-    )
+    if not SUBMODULES:
+        generator = buildNeuralNetworkFromJson(
+            f"./network_architectures/generators/{ARCHITECTURE_ID}.json"
+        )
+    else:
+        generator = ConvAttenColorizationNetwork(
+            architecture_path=f"./network_architectures/generators/{ARCHITECTURE_ID}.json",
+            pretrained_models_config=SUBMODULES
+        )
     generator = generator.to(device)
 
     total_params = sum(p.numel() for p in generator.parameters())

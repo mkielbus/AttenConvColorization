@@ -1,9 +1,9 @@
 {
-    "BATCH_SIZE": 50,
+    "BATCH_SIZE": 5,
     "TRAIN_DATA_PATH": "./data/DIV2K_train_LR_bicubic/X4",
     "VALIDATION_DATA_PATH": "./data/DIV2K_valid_LR_bicubic/X4",
-    "HYPERPARAMS_ID": "convAttenChannelExtractionR_v4",
-    "ARCHITECTURE_ID": "vit_256_channel_extraction_v4",
+    "HYPERPARAMS_ID": "convAttenChannelExtractionG_v5",
+    "ARCHITECTURE_ID": "vit_256_channel_extraction_v5",
     "LEARNING_RATE": 0.0001,
     "GAMMA": 0.99,
     "IMAGE_RESIZE": 256,
@@ -11,8 +11,8 @@
     "EPOCHS": 300,
     "DIAGRAMS_DATA_PATH": "./diagrams_data",
     "WEIGHTS_PATH": "./weights",
-    "PATIENCE": 15,
-    "DIAGRAMS_PATH": "./diagrams/convAttenChannelExtractionR_v4",
+    "PATIENCE": 20,
+    "DIAGRAMS_PATH": "./diagrams/convAttenChannelExtractionG_v5",
     "VISUALIZE_EVERY": 5,
     "GRADIENT_CLIP": 1.0,
     "PERCEPTUAL_WEIGHT": 1.0,
@@ -20,5 +20,5 @@
     "LPIPS_NET": "alex",
     "COLORFULNESS_WEIGHT": 0.0,
     "COLORFULNESS_TARGET": null,
-    "TARGET_CHANNEL": "R"
+    "TARGET_CHANNEL": "G"
 }
