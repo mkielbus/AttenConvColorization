@@ -4,8 +4,8 @@ from pyaiwrap.datasets import PairedImageFolder
 from pyaiwrap.loss import VAELoss
 from pyaiwrap.metrics import VAEMetrics
 from pyaiwrap.vae import loadHyperparameters
-from pyaiwrap.control import vaeControlFunction
-from pyaiwrap.transforms import ToGrayscale, ExtractGreenChannelTo3Channel
+from pyaiwrap.control import VAEControlFunc
+from pyaiwrap.transforms import ToGrayscale, ExtractGreenChannel
 from pyaiwrap.utils import prepareDevice
 from pyaiwrap.neural_network import VAE
 import torch
@@ -60,28 +60,28 @@ if __name__ == "__main__":
     VISUALIZE_EVERY = hyperparams["VISUALIZE_EVERY"]
     GRADIENT_CLIP = hyperparams["GRADIENT_CLIP"]
 
-    # Transform for grayscale: resize -> grayscale (3 channels, same values) -> tensor
+    # Transform for grayscale: resize -> grayscale (1 channel) -> tensor
     transform_grayscale = transforms.Compose([
         transforms.Resize((IMAGE_RESIZE, IMAGE_RESIZE)),
-        ToGrayscale(num_output_channels=3),  # 3 channels with same grayscale values
-        transforms.ToTensor()                 # (3, H, W)
+        ToGrayscale(num_output_channels=1),
+        transforms.ToTensor()                 # (1, H, W)
     ])
 
-    # Transform for green channel: resize -> extract green to 3-channel (only green populated)
+    # Transform for green channel: resize -> extract green to 1-channel
     transform_green_channel = transforms.Compose([
         transforms.Resize((IMAGE_RESIZE, IMAGE_RESIZE)),
-        ExtractGreenChannelTo3Channel()  # Creates (3, H, W) with [0, green, 0]
+        ExtractGreenChannel()  # (1, H, W)
     ])
 
     train_dataset = PairedImageFolder(
         TRAIN_DATA_PATH,
-        input_transform=transform_grayscale,      # Input: grayscale in 3 channels (3, H, W)
-        target_transform=transform_green_channel  # Target: RGB with only green (3, H, W)
+        input_transform=transform_grayscale,      # Input: grayscale (1, H, W)
+        target_transform=transform_green_channel  # Target: RGB with only green (1, H, W)
     )
     validation_dataset = PairedImageFolder(
         VALIDATION_DATA_PATH,
-        input_transform=transform_grayscale,      # Input: grayscale in 3 channels (3, H, W)
-        target_transform=transform_green_channel  # Target: RGB with only green (3, H, W)
+        input_transform=transform_grayscale,      # Input: grayscale (1, H, W)
+        target_transform=transform_green_channel  # Target: RGB with only green (1, H, W)
     )
 
     train_loader = DataLoader(
@@ -148,7 +148,7 @@ if __name__ == "__main__":
         max_patience=PATIENCE,
         model_type="VAE",
         gradient_clip=GRADIENT_CLIP,
-        control_fn=vaeControlFunction,
+        control_fn=VAEControlFunc(target_channel="G"),
         early_stopping_metric="total_loss"
     )
 

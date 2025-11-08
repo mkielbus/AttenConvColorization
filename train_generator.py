@@ -3,10 +3,10 @@ from pyaiwrap.config import buildNeuralNetworkFromJson
 from pyaiwrap.datasets import PairedImageFolder
 from pyaiwrap.loss import GeneratorColorizationLoss
 from pyaiwrap.metrics import GeneratorColorizationMetrics
-from pyaiwrap.control import generatorControlFunction
+from pyaiwrap.control import GeneratorControlFunc
 from pyaiwrap.generator import loadHyperparameters
-from pyaiwrap.transforms import ToGrayscale, ExtractRedChannelTo3Channel, ExtractGreenChannelTo3Channel, \
-     ExtractBlueChannelTo3Channel
+from pyaiwrap.transforms import ToGrayscale, ExtractRedChannel, ExtractGreenChannel, \
+     ExtractBlueChannel
 from pyaiwrap.neural_network import ConvAttenColorizationNetwork
 from pyaiwrap.utils import prepareDevice
 import torch
@@ -44,21 +44,24 @@ def getTargetChannelTransform(target_channel: str, image_size: int, has_submodul
     elif target_channel == "R":
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
-            ExtractRedChannelTo3Channel()
+            transforms.ToTensor(),
+            ExtractRedChannel(num_output_channels=1)  # [1, H, W]
         ])
-        channel_format = "[red_values, 0, 0]"
+        channel_format = "[red_values] (single channel)"
     elif target_channel == "G":
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
-            ExtractGreenChannelTo3Channel()
+            transforms.ToTensor(),
+            ExtractGreenChannel(num_output_channels=1)  # [1, H, W]
         ])
-        channel_format = "[0, green_values, 0]"
+        channel_format = "[green_values] (single channel)"
     elif target_channel == "B":
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
-            ExtractBlueChannelTo3Channel()
+            transforms.ToTensor(),
+            ExtractBlueChannel(num_output_channels=1)  # [1, H, W]
         ])
-        channel_format = "[0, 0, blue_values]"
+        channel_format = "[blue_values] (single channel)"
     else:
         raise ValueError(f"TARGET_CHANNEL must be 'R', 'G', or 'B' when no submodules, got '{target_channel}'")
 
@@ -238,7 +241,7 @@ if __name__ == "__main__":
         max_patience=PATIENCE,
         model_type="custom",
         gradient_clip=GRADIENT_CLIP,
-        control_fn=generatorControlFunction,
+        control_fn=GeneratorControlFunc(target_channel=TARGET_CHANNEL),
         early_stopping_metric="total_loss"
     )
 

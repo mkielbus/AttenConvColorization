@@ -2,10 +2,10 @@ from pyaiwrap.config import buildNeuralNetworkFromJson
 from pyaiwrap.train import train
 from pyaiwrap.loss import GANLoss
 from pyaiwrap.metrics import GANMetrics
-from pyaiwrap.control import ganControlFunction
+from pyaiwrap.control import GANControlFunc
 from pyaiwrap.gan import loadHyperparameters, warmupGAN
 from pyaiwrap.datasets import PairedImageFolder
-from pyaiwrap.transforms import ToGrayscale, ExtractGreenChannelTo3Channel
+from pyaiwrap.transforms import ToGrayscale, ExtractGreenChannel
 from pyaiwrap.utils import prepareDevice
 import torch
 import torchvision.transforms as transforms
@@ -67,17 +67,17 @@ if __name__ == "__main__":
     GRADIENT_CLIP = hyperparams["GRADIENT_CLIP"]
     WARMUP_EPOCHS = hyperparams["WARMUP_EPOCHS"]
 
-    # Transform for grayscale: resize -> grayscale (3 channels, same values) -> tensor
+    # Transform for grayscale: resize -> grayscale (1 channel) -> tensor
     transform_grayscale = transforms.Compose([
         transforms.Resize((IMAGE_RESIZE, IMAGE_RESIZE)),
-        ToGrayscale(num_output_channels=3),  # 3 channels with same grayscale values
-        transforms.ToTensor()                 # Convert to tensor: (3, H, W)
+        ToGrayscale(num_output_channels=1),
+        transforms.ToTensor()                 # (1, H, W)
     ])
 
-    # Transform for green channel: resize -> extract green to 3-channel (only green populated)
+    # Transform for green channel: resize -> extract green to 1-channel
     transform_green_channel = transforms.Compose([
         transforms.Resize((IMAGE_RESIZE, IMAGE_RESIZE)),
-        ExtractGreenChannelTo3Channel()  # Creates (3, H, W) with [0, green, 0]
+        ExtractGreenChannel()  # Creates (1, H, W)
     ])
 
     train_dataset = PairedImageFolder(
@@ -179,7 +179,7 @@ if __name__ == "__main__":
         max_patience=PATIENCE,
         model_type="GAN",
         gradient_clip=GRADIENT_CLIP,
-        control_fn=ganControlFunction,
+        control_fn=GANControlFunc(target_channel="G"),
         early_stopping_metric="generator_loss"
     )
 
