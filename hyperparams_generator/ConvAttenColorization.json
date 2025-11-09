@@ -23,16 +23,16 @@
     "TARGET_CHANNEL": "RGB",
     "SUBMODULES": {
         "red_model": {
-            "architecture_path": "./network_architectures/generators/vit_256_channel_extraction_v4.json",
-            "weights_path": "./weights/custom_generator_hyperparams_convAttenChannelExtractionR_v4.pth"
+            "architecture_path": "./network_architectures/generators/vit_256_channel_extraction_v6.json",
+            "weights_path": "./weights/custom_generator_hyperparams_convAttenChannelExtractionR_v6.pth"
         },
         "green_model": {
-            "architecture_path": "./network_architectures/generators/vit_256_channel_extraction_v4.json",
-            "weights_path": "./weights/custom_generator_hyperparams_convAttenChannelExtractionG_v4.pth"
+            "architecture_path": "./network_architectures/generators/vit_256_channel_extraction_v6.json",
+            "weights_path": "./weights/custom_generator_hyperparams_convAttenChannelExtractionG_v6.pth"
         },
         "blue_model": {
-            "architecture_path": "./network_architectures/generators/vit_256_channel_extraction_v4.json",
-            "weights_path": "./weights/custom_generator_hyperparams_convAttenChannelExtractionB_v4.pth"
+            "architecture_path": "./network_architectures/generators/vit_256_channel_extraction_v6.json",
+            "weights_path": "./weights/custom_generator_hyperparams_convAttenChannelExtractionB_v6.pth"
         }
     }
 }
