@@ -1,7 +1,5 @@
 [
     {"type": "Conv2d", "params": {"in_channels": 1, "out_channels": 96, "kernel_size": 1, "stride": 1, "padding": 0}},
-    {"type": "InstanceNorm2d", "params": {"num_features": 96}},
-    {"type": "GELU", "params": {}},
     
     {"type": "ImageTransformerNet", "params": {
         "channels": 96,
@@ -12,11 +10,7 @@
         "use_patches": true,
         "patch_size": 4
     }},
-    
-    {"type": "Conv2d", "params": {"in_channels": 96, "out_channels": 64, "kernel_size": 3, "stride": 1, "padding": 1}},
-    {"type": "GELU", "params": {}},
-    {"type": "Conv2d", "params": {"in_channels": 64, "out_channels": 32, "kernel_size": 3, "stride": 1, "padding": 1}},
-    {"type": "GELU", "params": {}},
-    {"type": "Conv2d", "params": {"in_channels": 32, "out_channels": 1, "kernel_size": 3, "stride": 1, "padding": 1}},
+
+    {"type": "Conv2d", "params": {"in_channels": 96, "out_channels": 1, "kernel_size": 1, "stride": 1, "padding": 0}},
     {"type": "Sigmoid", "params": {}}
 ]
