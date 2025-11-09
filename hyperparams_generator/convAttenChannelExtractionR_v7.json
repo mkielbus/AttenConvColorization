@@ -1,5 +1,5 @@
 {
-    "BATCH_SIZE": 50,
+    "BATCH_SIZE": 25,
     "TRAIN_DATA_PATH": "./data/DIV2K_train_LR_bicubic/X4",
     "VALIDATION_DATA_PATH": "./data/DIV2K_valid_LR_bicubic/X4",
     "HYPERPARAMS_ID": "convAttenChannelExtractionR_v7",
