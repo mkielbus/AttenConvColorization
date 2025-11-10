@@ -189,9 +189,13 @@ if __name__ == "__main__":
             f"./network_architectures/generators/{ARCHITECTURE_ID}.json"
         )
     else:
+        trainable_network = buildNeuralNetworkFromJson(
+            f"./network_architectures/generators/{ARCHITECTURE_ID}.json"
+        )
+
         generator = ConvAttenColorizationNetwork(
-            architecture_path=f"./network_architectures/generators/{ARCHITECTURE_ID}.json",
-            pretrained_models_config=SUBMODULES
+            pretrained_models_config=SUBMODULES,
+            trainable_network=trainable_network
         )
     generator = generator.to(device)
 
