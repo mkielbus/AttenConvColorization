@@ -1,5 +1,5 @@
 {
-    "BATCH_SIZE": 1,
+    "BATCH_SIZE": 10,
     "TRAIN_DATA_PATH": "./data/DIV2K_train_LR_bicubic/X4",
     "VALIDATION_DATA_PATH": "./data/DIV2K_valid_LR_bicubic/X4",
     "HYPERPARAMS_ID": "ConvAttenColorization_v4",
@@ -18,7 +18,7 @@
     "PERCEPTUAL_WEIGHT": 0.1,
     "USE_LPIPS": true,
     "LPIPS_NET": "alex",
-    "COLORFULNESS_WEIGHT": 0.3,
+    "COLORFULNESS_WEIGHT": 0.5,
     "COLORFULNESS_TARGET": null,
     "TARGET_CHANNEL": "RGB",
     "SUBMODULES": {
