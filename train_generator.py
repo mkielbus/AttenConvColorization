@@ -35,7 +35,7 @@ def getTargetChannelTransform(target_channel: str, image_size: int, has_submodul
     Raises:
         ValueError: If target_channel is not "R", "G", "B", or "RGB"
     """
-    if has_submodules:
+    if has_submodules or target_channel == "RGB":
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
             transforms.ToTensor()
@@ -63,7 +63,7 @@ def getTargetChannelTransform(target_channel: str, image_size: int, has_submodul
         ])
         channel_format = "[blue_values] (single channel)"
     else:
-        raise ValueError(f"TARGET_CHANNEL must be 'R', 'G', or 'B' when no submodules, got '{target_channel}'")
+        raise ValueError(f"TARGET_CHANNEL must be 'R', 'G', 'B' or 'RGB' when no submodules, got '{target_channel}'")
 
     return transform, channel_format
 
