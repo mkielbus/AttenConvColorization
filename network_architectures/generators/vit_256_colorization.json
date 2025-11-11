@@ -10,12 +10,12 @@
             "patch_size": 4,
             "only_use_encoder": true,
             "use_decoder_masking": false,
-            "output_channels": 3
+            "output_channels": 64
         }
     },
     {
         "type": "Conv2d",
-        "params": {"in_channels": 3, "out_channels": 128, "kernel_size": 5, "padding": 2}
+        "params": {"in_channels": 64, "out_channels": 128, "kernel_size": 7, "padding": 3}
     },
     {
         "type": "ReLU",
@@ -23,7 +23,31 @@
     },
     {
         "type": "Conv2d",
-        "params": {"in_channels": 128, "out_channels": 3, "kernel_size": 3, "padding": 1}
+        "params": {"in_channels": 128, "out_channels": 256, "kernel_size": 5, "padding": 2}
+    },
+    {
+        "type": "ReLU",
+        "params": {"inplace": true}
+    },
+    {
+        "type": "Conv2d",
+        "params": {"in_channels": 256, "out_channels": 128, "kernel_size": 3, "padding": 1}
+    },
+    {
+        "type": "ReLU",
+        "params": {"inplace": true}
+    },
+    {
+        "type": "Conv2d",
+        "params": {"in_channels": 128, "out_channels": 64, "kernel_size": 3, "padding": 1}
+    },
+    {
+        "type": "ReLU",
+        "params": {"inplace": true}
+    },
+    {
+        "type": "Conv2d",
+        "params": {"in_channels": 64, "out_channels": 3, "kernel_size": 1}
     },
     {
         "type": "Sigmoid",
