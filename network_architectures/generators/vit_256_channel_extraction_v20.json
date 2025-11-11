@@ -1,11 +1,11 @@
 [
     {
-        "type": "ColorizationTransformerNet",
+        "type": "ColorizationTransformerNet", 
         "params": {
-            "embed_dim": 256,
-            "num_layers": 6,  
-            "num_heads": 8,
-            "mlp_ratio": 2,
+            "embed_dim": 128,
+            "num_layers": 5,
+            "num_heads": 4,
+            "mlp_ratio": 4,
             "dropout": 0.1,
             "patch_size": 4,
             "only_use_encoder": true,
@@ -26,8 +26,8 @@
         "params": {"inplace": true}
     },
     {
-        "type": "Conv2d", 
-        "params": {"in_channels": 64, "out_channels": 32, "kernel_size": 5, "padding": 2}
+        "type": "Conv2d",
+        "params": {"in_channels": 64, "out_channels": 32, "kernel_size": 7, "padding": 3}
     },
     {
         "type": "InstanceNorm2d",
@@ -38,8 +38,8 @@
         "params": {"inplace": true}
     },
     {
-        "type": "Conv2d",
-        "params": {"in_channels": 32, "out_channels": 3, "kernel_size": 3, "padding": 1}
+        "type": "Conv2d", 
+        "params": {"in_channels": 32, "out_channels": 1, "kernel_size": 5, "padding": 2}
     },
     {
         "type": "Sigmoid",
