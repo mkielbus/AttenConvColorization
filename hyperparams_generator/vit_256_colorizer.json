@@ -29,10 +29,10 @@
     "DIAGRAMS_PATH": "./diagrams/vit_256_colorization",
     "VISUALIZE_EVERY": 5,
     "GRADIENT_CLIP": 0.5,
-    "PERCEPTUAL_WEIGHT": 0.4,
+    "PERCEPTUAL_WEIGHT": 0.0,
     "USE_LPIPS": true,
     "LPIPS_NET": "alex",
-    "COLORFULNESS_WEIGHT": 0.1,
+    "COLORFULNESS_WEIGHT": 0.0,
     "COLORFULNESS_TARGET": null,
     "TARGET_CHANNEL": "RGB"
 }
