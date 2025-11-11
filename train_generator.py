@@ -114,8 +114,7 @@ def createScheduler(optimizer, hyperparams: Dict[str, Any], train_loader_len: in
             mode='min',
             factor=hyperparams.get("LR_REDUCTION_FACTOR", 0.5),
             patience=hyperparams.get("LR_PATIENCE", 10),
-            min_lr=min_lr,
-            verbose=False
+            min_lr=min_lr
         )
         print(f"Using ReduceLROnPlateau (factor={hyperparams.get('LR_REDUCTION_FACTOR', 0.5)}, patience={hyperparams.get('LR_PATIENCE', 10)})")
 
