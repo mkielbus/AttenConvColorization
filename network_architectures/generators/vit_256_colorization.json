@@ -9,6 +9,7 @@
             "dropout": 0.1,
             "patch_size": 8,
             "only_use_encoder": true,
+            "use_decoder_masking": false,
             "output_channels": 3
         }
     }
