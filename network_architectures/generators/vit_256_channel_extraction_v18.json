@@ -3,7 +3,7 @@
         "type": "ColorizationTransformerNet", 
         "params": {
             "embed_dim": 512,
-            "num_layers": 8,
+            "num_layers": 10,
             "num_heads": 2,
             "mlp_ratio": 4,
             "dropout": 0.1,
