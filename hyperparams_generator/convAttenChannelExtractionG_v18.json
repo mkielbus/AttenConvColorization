@@ -25,7 +25,7 @@
     "EPOCHS": 200,
     "DIAGRAMS_DATA_PATH": "./diagrams_data",
     "WEIGHTS_PATH": "./weights",
-    "PATIENCE": 40,
+    "PATIENCE": 30,
     "DIAGRAMS_PATH": "./diagrams/convAttenChannelExtractionG_v18",
     "VISUALIZE_EVERY": 5,
     "GRADIENT_CLIP": 1.0,
