@@ -11,6 +11,5 @@
         "use_decoder_masking": true,
         "output_channels": 1
     }
-    },
-    {"type": "Sigmoid", "params": {}}
+    }
 ]
