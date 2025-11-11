@@ -14,11 +14,11 @@
     "PATIENCE": 30,
     "DIAGRAMS_PATH": "./diagrams/vit_256_colorizer",
     "VISUALIZE_EVERY": 5,
-    "GRADIENT_CLIP": 5.0,
-    "PERCEPTUAL_WEIGHT": 0.1,
+    "GRADIENT_CLIP": 1.0,
+    "PERCEPTUAL_WEIGHT": 0.02,
     "USE_LPIPS": true,
     "LPIPS_NET": "alex",
-    "COLORFULNESS_WEIGHT": 0.1,
+    "COLORFULNESS_WEIGHT": 0.01,
     "COLORFULNESS_TARGET": null,
     "TARGET_CHANNEL": "RGB"
 }

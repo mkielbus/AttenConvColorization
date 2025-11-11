@@ -2,12 +2,12 @@
     {
     "type": "ColorizationTransformerNet",
     "params": {
-        "embed_dim": 512,
+        "embed_dim": 256,
         "num_layers": 6,
-        "num_heads": 2,
+        "num_heads": 8,
         "mlp_ratio": 4,
         "dropout": 0.1,
-        "patch_size": 4,
+        "patch_size": 16,
         "use_decoder_masking": true
     }
     },
