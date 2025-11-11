@@ -3,7 +3,7 @@
     "TRAIN_DATA_PATH": "./data/DIV2K_train_LR_bicubic/X4",
     "VALIDATION_DATA_PATH": "./data/DIV2K_valid_LR_bicubic/X4",
     "HYPERPARAMS_ID": "vit_256_colorizer",
-    "ARCHITECTURE_ID": "vit_256_ccolorization",
+    "ARCHITECTURE_ID": "vit_256_colorization",
     "LEARNING_RATE": 0.0003,
     "WEIGHT_DECAY": 0.01,
     "USE_ADAMW": true,
