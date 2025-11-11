@@ -1,0 +1,15 @@
+[
+    {
+        "type": "ColorizationTransformerNet",
+        "params": {
+            "embed_dim": 128,
+            "num_layers": 3,
+            "num_heads": 4,
+            "mlp_ratio": 2,
+            "dropout": 0.1,
+            "patch_size": 4,
+            "use_decoder_masking": false,
+            "output_channels": 1
+        }
+    }
+]
