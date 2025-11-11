@@ -298,7 +298,7 @@ if __name__ == "__main__":
     schedulers = {'generator': scheduler}
 
     loss_fn = GeneratorColorizationLoss(
-        reconstruction_loss_fn=nn.L1Loss(),
+        reconstruction_loss_fn=nn.MSELoss(),
         perceptual_weight=PERCEPTUAL_WEIGHT,
         colorfulness_weight=COLORFULNESS_WEIGHT,
         colorfulness_target=COLORFULNESS_TARGET,
