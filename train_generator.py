@@ -108,16 +108,6 @@ def createScheduler(optimizer, hyperparams: Dict[str, Any], train_loader_len: in
         )
         print(f"Using OneCycleLR (max_lr={learning_rate * hyperparams.get('MAX_LR_MULTIPLIER', 10):.2e})")
 
-    elif scheduler_type == "reduce_on_plateau":
-        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            optimizer,
-            mode='min',
-            factor=hyperparams.get("LR_REDUCTION_FACTOR", 0.5),
-            patience=hyperparams.get("LR_PATIENCE", 10),
-            min_lr=min_lr
-        )
-        print(f"Using ReduceLROnPlateau (factor={hyperparams.get('LR_REDUCTION_FACTOR', 0.5)}, patience={hyperparams.get('LR_PATIENCE', 10)})")
-
     elif scheduler_type == "cosine":
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
             optimizer,

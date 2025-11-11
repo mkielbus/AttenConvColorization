@@ -7,7 +7,7 @@
     "LEARNING_RATE": 0.00015,
     "WEIGHT_DECAY": 0.01,
     "USE_ADAMW": true,
-    "SCHEDULER_TYPE": "reduce_on_plateau",
+    "SCHEDULER_TYPE": "cosine_warm_restarts",
     "GAMMA": 0.99,
     "MIN_LR": 1e-6,
     "T_0": 50,
@@ -29,10 +29,10 @@
     "DIAGRAMS_PATH": "./diagrams/vit_256_colorization",
     "VISUALIZE_EVERY": 5,
     "GRADIENT_CLIP": 0.5,
-    "PERCEPTUAL_WEIGHT": 0.0,
-    "USE_LPIPS": false,
+    "PERCEPTUAL_WEIGHT": 0.4,
+    "USE_LPIPS": true,
     "LPIPS_NET": "alex",
-    "COLORFULNESS_WEIGHT": 0.0,
+    "COLORFULNESS_WEIGHT": 0.1,
     "COLORFULNESS_TARGET": null,
     "TARGET_CHANNEL": "RGB"
 }
