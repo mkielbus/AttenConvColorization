@@ -50,7 +50,7 @@
         "params": {"in_channels": 64, "out_channels": 3, "kernel_size": 1}
     },
     {
-        "type": "Sigmoid",
+        "type": "Tanh",
         "params": {}
     }
 ]
