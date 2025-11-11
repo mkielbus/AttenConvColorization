@@ -335,7 +335,6 @@ if __name__ == "__main__":
     )
 
     print("Training Completed!")
-    print(f"Task: Luminance (1ch) → {TARGET_CHANNEL} Channel (3ch) Colorization")
     print("Input format: [luminance]")
     print(f"Target format: {channel_format}")
 
