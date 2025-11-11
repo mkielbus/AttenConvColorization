@@ -9,7 +9,7 @@
         "dropout": 0.1,
         "patch_size": 8,
         "use_decoder_masking": true,
-        "output_channels": 1
+        "output_channels": 3
     }
     },
     {"type": "Sigmoid", "params": {}}
