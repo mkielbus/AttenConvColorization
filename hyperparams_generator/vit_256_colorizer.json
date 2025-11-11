@@ -4,7 +4,7 @@
     "VALIDATION_DATA_PATH": "./data/DIV2K_valid_LR_bicubic/X4",
     "HYPERPARAMS_ID": "vit_256_colorizer",
     "ARCHITECTURE_ID": "vit_256_channel_extraction_v16",
-    "LEARNING_RATE": 0.00001,
+    "LEARNING_RATE": 0.0001,
     "GAMMA": 0.99,
     "IMAGE_RESIZE": 256,
     "INPUT_CHANNELS": 1,
@@ -15,10 +15,10 @@
     "DIAGRAMS_PATH": "./diagrams/vit_256_colorizer",
     "VISUALIZE_EVERY": 5,
     "GRADIENT_CLIP": 1.0,
-    "PERCEPTUAL_WEIGHT": 0.02,
-    "USE_LPIPS": true,
+    "PERCEPTUAL_WEIGHT": 0.0,
+    "USE_LPIPS": false,
     "LPIPS_NET": "alex",
-    "COLORFULNESS_WEIGHT": 0.01,
+    "COLORFULNESS_WEIGHT": 0.0,
     "COLORFULNESS_TARGET": null,
     "TARGET_CHANNEL": "RGB"
 }
