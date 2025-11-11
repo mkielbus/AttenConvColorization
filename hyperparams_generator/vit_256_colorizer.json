@@ -7,7 +7,7 @@
     "LEARNING_RATE": 0.00001,
     "GAMMA": 0.99,
     "IMAGE_RESIZE": 256,
-    "INPUT_CHANNELS": 3,
+    "INPUT_CHANNELS": 1,
     "EPOCHS": 500,
     "DIAGRAMS_DATA_PATH": "./diagrams_data",
     "WEIGHTS_PATH": "./weights",

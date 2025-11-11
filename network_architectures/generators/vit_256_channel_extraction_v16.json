@@ -1,15 +1,15 @@
 [    
-    {"type": "ImageTransformerNet", "params": {
-        "channels": 3,
-        "embed_channels": 512,
+    {
+    "type": "ColorizationTransformerNet",
+    "params": {
+        "embed_dim": 512,
+        "num_layers": 6,
         "num_heads": 8,
         "mlp_ratio": 4,
         "dropout": 0.1,
-        "num_layers": 6,
-        "use_patches": true,
         "patch_size": 4,
-        "use_decoder_masking": false,
-        "only_use_encoder": true
-    }},
+        "use_decoder_masking": true
+    }
+    },
     {"type": "Sigmoid", "params": {}}
 ]
