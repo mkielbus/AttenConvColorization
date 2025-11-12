@@ -1,0 +1,48 @@
+[
+    {
+    "type": "ColorizationTransformerNet",
+    "params": {
+        "embed_dim": 1024,
+        "num_layers": 3,
+        "num_heads": 2,
+        "mlp_ratio": 4,
+        "dropout": 0.1,
+        "patch_size": 4,
+        "only_use_encoder": false,
+        "use_decoder_masking": true,
+        "output_channels": 64
+    }
+    },
+    {
+        "type": "Conv2d",
+        "params": {"in_channels": 64, "out_channels": 128, "kernel_size": 7, "padding": 3}
+    },
+    {
+        "type": "ReLU",
+        "params": {"inplace": true}
+    },
+    {
+        "type": "Conv2d", 
+        "params": {"in_channels": 128, "out_channels": 64, "kernel_size": 5, "padding": 2}
+    },
+    {
+        "type": "ReLU",
+        "params": {"inplace": true}
+    },
+    {
+        "type": "Conv2d",
+        "params": {"in_channels": 64, "out_channels": 32, "kernel_size": 3, "padding": 1}
+    },
+    {
+        "type": "ReLU",
+        "params": {"inplace": true}
+    },
+    {
+        "type": "Conv2d",
+        "params": {"in_channels": 32, "out_channels": 1, "kernel_size": 3, "padding": 1}
+    },
+    {
+        "type": "Sigmoid",
+        "params": {}
+    }
+]
