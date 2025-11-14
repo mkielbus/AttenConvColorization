@@ -11,7 +11,7 @@
             "target_channel": "red",
             "memory_size": 256,
             "color_channels": 64,
-            "smoothing_config_path": "smoothing_net_r.json"
+            "smoothing_config_path": "network_architectures/generators/smoothing_net_r.json"
         }
     }
 ]
