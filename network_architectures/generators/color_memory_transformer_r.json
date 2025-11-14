@@ -9,7 +9,7 @@
             "num_layers": 6,
             "patch_size": 4,
             "target_channel": "red",
-            "memory_size": 256,
+            "memory_size": 2048,
             "color_channels": 64,
             "smoothing_config_path": "network_architectures/generators/smoothing_net_r.json"
         }
