@@ -14,59 +14,69 @@ import torch.nn as nn
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 import argparse
-from typing import Tuple
 from typing import Dict, Any
 import warnings
 warnings.filterwarnings('ignore', category=UserWarning, module='torchvision')
 
 
-def getTargetChannelTransform(target_channel: str, image_size: int, has_submodules: bool) -> Tuple[transforms.Compose,
-                                                                                                   str]:
+def channelTransform(channel_type: str, image_size: int, output_channels: int, is_input: bool = True) -> transforms.Compose:
     """
-    Get the appropriate transform for the target color channel.
+    Get the appropriate transform for input or target channels.
 
     Args:
-        target_channel: Channel to extract ("R", "G", "B", or "RGB")
+        channel_type: Channel type ("luminance", "R", "G", "B", or "RGB")
         image_size: Size to resize images to
-        has_submodules: Whether SUBMODULES is not empty
+        output_channels: Number of output channels (1 or 3)
+        is_input: Whether this is for input (True) or target (False)
 
     Returns:
-        Tuple of (transform, channel_format_string)
+        Transform composition
 
     Raises:
-        ValueError: If target_channel is not "R", "G", "B", or "RGB"
+        ValueError: If channel_type is invalid
     """
-    if has_submodules or target_channel == "RGB":
+    if channel_type == "RGB":
+        if not is_input:
+            raise ValueError("RGB can only be used for input channels, not target channels")
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
             transforms.ToTensor()
         ])
-        channel_format = "[red_values, green_values, blue_values]"
-    elif target_channel == "R":
-        transform = transforms.Compose([
-            transforms.Resize((image_size, image_size)),
-            transforms.ToTensor(),
-            ExtractRedChannel(num_output_channels=1)  # [1, H, W]
-        ])
-        channel_format = "[red_values] (single channel)"
-    elif target_channel == "G":
-        transform = transforms.Compose([
-            transforms.Resize((image_size, image_size)),
-            transforms.ToTensor(),
-            ExtractGreenChannel(num_output_channels=1)  # [1, H, W]
-        ])
-        channel_format = "[green_values] (single channel)"
-    elif target_channel == "B":
-        transform = transforms.Compose([
-            transforms.Resize((image_size, image_size)),
-            transforms.ToTensor(),
-            ExtractBlueChannel(num_output_channels=1)  # [1, H, W]
-        ])
-        channel_format = "[blue_values] (single channel)"
-    else:
-        raise ValueError(f"TARGET_CHANNEL must be 'R', 'G', 'B' or 'RGB' when no submodules, got '{target_channel}'")
 
-    return transform, channel_format
+    elif channel_type == "luminance":
+        if not is_input:
+            raise ValueError("luminance can only be used for input channels, not target channels")
+        transform = transforms.Compose([
+            transforms.Resize((image_size, image_size)),
+            ToGrayscale(num_output_channels=output_channels),
+            transforms.ToTensor()
+        ])
+
+    elif channel_type == "R":
+        transform = transforms.Compose([
+            transforms.Resize((image_size, image_size)),
+            transforms.ToTensor(),
+            ExtractRedChannel(num_output_channels=output_channels)
+        ])
+
+    elif channel_type == "G":
+        transform = transforms.Compose([
+            transforms.Resize((image_size, image_size)),
+            transforms.ToTensor(),
+            ExtractGreenChannel(num_output_channels=output_channels)
+        ])
+
+    elif channel_type == "B":
+        transform = transforms.Compose([
+            transforms.Resize((image_size, image_size)),
+            transforms.ToTensor(),
+            ExtractBlueChannel(num_output_channels=output_channels)
+        ])
+
+    else:
+        raise ValueError(f"channel_type must be 'luminance', 'R', 'G', 'B', or 'RGB', got '{channel_type}'")
+
+    return transform
 
 
 def createScheduler(optimizer, hyperparams: Dict[str, Any], train_loader_len: int, epochs: int):
@@ -163,7 +173,8 @@ if __name__ == "__main__":
     TRAIN_DATA_PATH = hyperparams["TRAIN_DATA_PATH"]
     VALIDATION_DATA_PATH = hyperparams["VALIDATION_DATA_PATH"]
     IMAGE_RESIZE = hyperparams["IMAGE_RESIZE"]
-    INPUT_CHANNELS = hyperparams["INPUT_CHANNELS"]
+    INPUT_CHANNEL = hyperparams["INPUT_CHANNEL"]
+    OUTPUT_CHANNELS = hyperparams["OUTPUT_CHANNELS"]
     HYPERPARAMS_ID = hyperparams["HYPERPARAMS_ID"]
     ARCHITECTURE_ID = hyperparams["ARCHITECTURE_ID"]
     SUBMODULES = hyperparams.get("SUBMODULES", {})
@@ -182,6 +193,7 @@ if __name__ == "__main__":
     USE_LPIPS = hyperparams["USE_LPIPS"]
     LPIPS_NET = hyperparams["LPIPS_NET"]
     TARGET_CHANNEL = hyperparams["TARGET_CHANNEL"]
+    TARGET_OUTPUT_CHANNELS = hyperparams["TARGET_OUTPUT_CHANNELS"]
     WEIGHT_DECAY = hyperparams.get("WEIGHT_DECAY", 0.01)
     USE_ADAMW = hyperparams.get("USE_ADAMW", True)
 
@@ -195,7 +207,7 @@ if __name__ == "__main__":
     print(f"Has Submodules: {has_submodules}")
     print(f"Batch Size: {BATCH_SIZE}")
     print(f"Image Size: {IMAGE_RESIZE}")
-    print(f"Input Channels: {INPUT_CHANNELS}")
+    print(f"Input Channel: {INPUT_CHANNEL}")
     print(f"Learning Rate: {LEARNING_RATE}")
     print(f"Epochs: {EPOCHS}")
     print(f"Patience: {PATIENCE}")
@@ -213,22 +225,17 @@ if __name__ == "__main__":
     else:
         print("  Colorfulness Target: Match Original")
 
-    transform_luminance = transforms.Compose([
-        transforms.Resize((IMAGE_RESIZE, IMAGE_RESIZE)),
-        ToGrayscale(num_output_channels=INPUT_CHANNELS),
-        transforms.ToTensor()
-    ])
-
-    transform_target_channel, channel_format = getTargetChannelTransform(TARGET_CHANNEL, IMAGE_RESIZE, has_submodules)
+    transform_input = channelTransform(INPUT_CHANNEL, IMAGE_RESIZE, OUTPUT_CHANNELS, is_input=True)
+    transform_target_channel = channelTransform(TARGET_CHANNEL, IMAGE_RESIZE, TARGET_OUTPUT_CHANNELS, is_input=False)
 
     train_dataset = PairedImageFolder(
         TRAIN_DATA_PATH,
-        input_transform=transform_luminance,
+        input_transform=transform_input,
         target_transform=transform_target_channel
     )
     validation_dataset = PairedImageFolder(
         VALIDATION_DATA_PATH,
-        input_transform=transform_luminance,
+        input_transform=transform_input,
         target_transform=transform_target_channel
     )
 
