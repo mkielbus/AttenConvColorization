@@ -342,8 +342,8 @@ if __name__ == "__main__":
     )
 
     print("Training Completed!")
-    print("Input format: [luminance]")
-    print(f"Target format: {channel_format}")
+    print(f"Input format: {INPUT_CHANNEL} - {OUTPUT_CHANNELS} channels")
+    print(f"Target format: {TARGET_CHANNEL} - {TARGET_OUTPUT_CHANNELS} channels")
 
     history = metrics.getHistoryLists()
 
