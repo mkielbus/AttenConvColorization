@@ -3,7 +3,7 @@
         "type": "ColorMemoryTransformer",
         "params": {
             "embed_dim": 128,
-            "num_heads": 4,
+            "num_heads": 2,
             "mlp_ratio": 4,
             "dropout": 0.1,
             "num_layers": 4,
