@@ -1,42 +1,9 @@
 [
     {
-        "type": "Conv2d",
+        "type": "ResidualRefinement",
         "params": {
             "in_channels": 3,
-            "out_channels": 16,
-            "kernel_size": 3,
-            "padding": 1
-        }
-    },
-    {
-        "type": "InstanceNorm2d",
-        "params": {
-            "num_features": 16
-        }
-    },
-    {
-        "type": "GELU",
-        "params": {}
-    },
-    {
-        "type": "Dropout",
-        "params": {
-            "p": 0.3
-        }
-    },
-    {
-        "type": "Conv2d",
-        "params": {
-            "in_channels": 16,
-            "out_channels": 3,
-            "kernel_size": 3,
-            "padding": 1
-        }
-    },
-    {
-        "type": "Lambda",
-        "params": {
-            "function": "lambda x, input: torch.clamp(x + input, 0, 1)"
+            "hidden_channels": 8
         }
     }
 ]
