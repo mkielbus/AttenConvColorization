@@ -1,0 +1,57 @@
+{
+    "BATCH_SIZE": 4,
+    "TRAIN_DATA_PATH": "./data/DIV2K_train_LR_bicubic/X4",
+    "VALIDATION_DATA_PATH": "./data/DIV2K_valid_LR_bicubic/X4",
+    "HYPERPARAMS_ID": "rgb_merge_unet",
+    "ARCHITECTURE_ID": "rgb_merge_unet",
+    "LEARNING_RATE": 0.0001,
+    "WEIGHT_DECAY": 0.01,
+    "USE_ADAMW": true,
+    "B1": 0.9,
+    "B2": 0.99,
+    "SCHEDULER_TYPE": "cosine_warm_restarts",
+    "GAMMA": 0.99,
+    "MIN_LR": 1e-6,
+    "T_0": 30,
+    "T_MULT": 2,
+    "MAX_LR_MULTIPLIER": 10,
+    "PCT_START": 0.1,
+    "DIV_FACTOR": 10,
+    "FINAL_DIV_FACTOR": 100,
+    "LR_REDUCTION_FACTOR": 0.7,
+    "LR_PATIENCE": 15,
+    "STEP_SIZE": 30,
+    "STEP_GAMMA": 0.1,
+    "IMAGE_RESIZE": 256,
+    "INPUT_CHANNELS": 1,
+    "INPUT_CHANNEL": "luminance",
+    "EPOCHS": 300,
+    "DIAGRAMS_DATA_PATH": "./diagrams_data",
+    "WEIGHTS_PATH": "./weights",
+    "PATIENCE": 40,
+    "DIAGRAMS_PATH": "./diagrams/rgb_merge_unet",
+    "VISUALIZE_EVERY": 5,
+    "GRADIENT_CLIP": 1.0,
+    "RECON_WEIGHT": 0.1,
+    "PERCEPTUAL_WEIGHT": 5.0,
+    "USE_LPIPS": true,
+    "LPIPS_NET": "alex",
+    "COLORFULNESS_WEIGHT": 0.5,
+    "COLORFULNESS_TARGET": null,
+    "TARGET_CHANNEL": "RGB",
+    "TARGET_OUTPUT_CHANNELS": 3,
+    "SUBMODULES": {
+        "red_model": {
+            "architecture_path": "./network_architectures/generators/color_memory_transformer_r.json",
+            "weights_path": "./weights/custom_generator_hyperparams_color_memory_transformer_r.pth"
+        },
+        "green_model": {
+            "architecture_path": "./network_architectures/generators/color_memory_transformer_g.json", 
+            "weights_path": "./weights/custom_generator_hyperparams_color_memory_transformer_g.pth"
+        },
+        "blue_model": {
+            "architecture_path": "./network_architectures/color_memory_transformer_b.json",
+            "weights_path": "./weights/custom_generator_hyperparams_color_memory_transformer_b.pth"
+        }
+    }
+}
