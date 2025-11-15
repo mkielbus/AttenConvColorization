@@ -1,9 +1,9 @@
 [
     {
-        "type": "ResidualRefinement",
+        "type": "MultiScaleScaledRefinement",
         "params": {
             "in_channels": 3,
-            "hidden_channels": 8
+            "hidden_channels": 32
         }
     }
 ]
