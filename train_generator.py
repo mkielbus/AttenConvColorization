@@ -187,6 +187,7 @@ if __name__ == "__main__":
     DIAGRAMS_PATH = hyperparams["DIAGRAMS_PATH"]
     VISUALIZE_EVERY = hyperparams["VISUALIZE_EVERY"]
     GRADIENT_CLIP = hyperparams["GRADIENT_CLIP"]
+    RECON_WEIGHT = hyperparams["RECON_WEIGHT"]
     PERCEPTUAL_WEIGHT = hyperparams["PERCEPTUAL_WEIGHT"]
     COLORFULNESS_WEIGHT = hyperparams["COLORFULNESS_WEIGHT"]
     COLORFULNESS_TARGET = hyperparams["COLORFULNESS_TARGET"]
@@ -196,6 +197,8 @@ if __name__ == "__main__":
     TARGET_OUTPUT_CHANNELS = hyperparams["TARGET_OUTPUT_CHANNELS"]
     WEIGHT_DECAY = hyperparams.get("WEIGHT_DECAY", 0.01)
     USE_ADAMW = hyperparams.get("USE_ADAMW", True)
+    B1 = hyperparams["B1"]
+    B2 = hyperparams["B2"]
 
     has_submodules = bool(SUBMODULES)
 
@@ -287,7 +290,7 @@ if __name__ == "__main__":
             generator.parameters(),
             lr=LEARNING_RATE,
             weight_decay=WEIGHT_DECAY,
-            betas=(0.9, 0.999)
+            betas=(B1, B2)
         )
         print(f"Using AdamW optimizer with weight decay: {WEIGHT_DECAY}")
     else:
@@ -305,7 +308,8 @@ if __name__ == "__main__":
     schedulers = {'generator': scheduler}
 
     loss_fn = GeneratorColorizationLoss(
-        reconstruction_loss_fn=nn.MSELoss(),
+        reconstruction_loss_fn=nn.L1Loss(),
+        recon_weight=RECON_WEIGHT,
         perceptual_weight=PERCEPTUAL_WEIGHT,
         colorfulness_weight=COLORFULNESS_WEIGHT,
         colorfulness_target=COLORFULNESS_TARGET,
