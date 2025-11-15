@@ -1,8 +1,8 @@
 {
-    "BATCH_SIZE": 3,
+    "BATCH_SIZE": 6,
     "TRAIN_DATA_PATH": "./data/DIV2K_train_LR_bicubic/X4",
     "VALIDATION_DATA_PATH": "./data/DIV2K_valid_LR_bicubic/X4",
-    "HYPERPARAMS_ID": "color_memory_transformer_g",
+    "HYPERPARAMS_ID": "color_memory_transformer_full_colorization",
     "ARCHITECTURE_ID": "color_memory_transformer_v1",
     "LEARNING_RATE": 0.0001,
     "WEIGHT_DECAY": 0.01,
@@ -29,7 +29,7 @@
     "DIAGRAMS_DATA_PATH": "./diagrams_data",
     "WEIGHTS_PATH": "./weights",
     "PATIENCE": 40,
-    "DIAGRAMS_PATH": "./diagrams/color_memory_transformer_g",
+    "DIAGRAMS_PATH": "./diagrams/color_memory_transformer_full_colorization",
     "VISUALIZE_EVERY": 5,
     "GRADIENT_CLIP": 1.0,
     "RECON_WEIGHT": 0.1,
@@ -38,7 +38,7 @@
     "LPIPS_NET": "alex",
     "COLORFULNESS_WEIGHT": 0.0,
     "COLORFULNESS_TARGET": null,
-    "TARGET_CHANNEL": "G",
-    "TARGET_OUTPUT_CHANNELS": 1,
+    "TARGET_CHANNEL": "ab",
+    "TARGET_OUTPUT_CHANNELS": 2,
     "SUBMODULES": {}
 }

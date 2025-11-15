@@ -8,7 +8,6 @@
             "dropout": 0.1,
             "num_layers": 9,
             "patch_size": 4,
-            "target_channel": "blue",
             "memory_size": 100,
             "smoothing_config_path": "network_architectures/generators/smoothing_net.json"
         }

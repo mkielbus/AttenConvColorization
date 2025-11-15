@@ -6,7 +6,7 @@ from pyaiwrap.metrics import GeneratorColorizationMetrics
 from pyaiwrap.control import GeneratorControlFunc
 from pyaiwrap.generator import loadHyperparameters
 from pyaiwrap.transforms import ToGrayscale, ExtractRedChannel, ExtractGreenChannel, \
-     ExtractBlueChannel
+     ExtractBlueChannel, RGBToLab, ExtractABChannels, ExtractABChannelsTo3Channel
 from pyaiwrap.neural_network import ConvAttenColorizationNetwork
 from pyaiwrap.utils import prepareDevice
 import torch
@@ -40,7 +40,27 @@ def channelTransform(channel_type: str, image_size: int, output_channels: int, i
             transforms.Resize((image_size, image_size)),
             transforms.ToTensor()
         ])
+    elif channel_type == "LAB":
+        transform = transforms.Compose([
+            transforms.Resize((image_size, image_size)),
+            RGBToLab()
+        ])
 
+    elif channel_type == "ab":
+        if output_channels not in [2, 3]:
+            raise ValueError("output_channels must be 2 or 3 for 'ab' channel_type")
+        transform = transforms.Compose([
+            transforms.Resize((image_size, image_size)),
+            transforms.ToTensor(),
+            ExtractABChannels(num_output_channels=output_channels)
+        ])
+
+    elif channel_type == "ab_to_3ch":
+        transform = transforms.Compose([
+            transforms.Resize((image_size, image_size)),
+            transforms.ToTensor(),
+            ExtractABChannelsTo3Channel()
+        ])
     elif channel_type == "luminance":
         if not is_input:
             raise ValueError("luminance can only be used for input channels, not target channels")
@@ -339,7 +359,7 @@ if __name__ == "__main__":
         max_patience=PATIENCE,
         model_type="custom",
         gradient_clip=GRADIENT_CLIP,
-        control_fn=GeneratorControlFunc(target_channel=TARGET_CHANNEL),
+        control_fn=GeneratorControlFunc(target_channel=TARGET_CHANNEL, input_channel=INPUT_CHANNEL),
         early_stopping_metric="total_loss"
     )
 
