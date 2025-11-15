@@ -50,7 +50,7 @@
             "weights_path": "./weights/custom_generator_hyperparams_color_memory_transformer_g.pth"
         },
         "blue_model": {
-            "architecture_path": "./network_architectures/color_memory_transformer_b.json",
+            "architecture_path": "./network_architectures/generators/color_memory_transformer_b.json",
             "weights_path": "./weights/custom_generator_hyperparams_color_memory_transformer_b.pth"
         }
     }
