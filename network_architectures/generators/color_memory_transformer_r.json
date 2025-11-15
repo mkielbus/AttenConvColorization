@@ -2,14 +2,14 @@
     {
         "type": "ColorMemoryTransformer",
         "params": {
-            "embed_dim": 512,
-            "num_heads": 2,
+            "embed_dim": 128,
+            "num_heads": 4,
             "mlp_ratio": 4,
             "dropout": 0.1,
-            "num_layers": 6,
+            "num_layers": 4,
             "patch_size": 4,
             "target_channel": "red",
-            "memory_size": 2048,
+            "memory_size": 256,
             "color_channels": 64,
             "smoothing_config_path": "network_architectures/generators/smoothing_net_r.json"
         }
