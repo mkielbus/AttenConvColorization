@@ -36,8 +36,6 @@ def channelTransform(channel_type: str, image_size: int, output_channels: int, i
         ValueError: If channel_type is invalid
     """
     if channel_type == "RGB":
-        if not is_input:
-            raise ValueError("RGB can only be used for input channels, not target channels")
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
             transforms.ToTensor()
