@@ -42,7 +42,7 @@
                     "params": {
                         "in_channels": 128,
                         "out_channels": 128,
-                        "upsample": true,
+                        "upsample": false,
                         "skip_connection": "enc3",
                         "block_name": "dec1"
                     }
