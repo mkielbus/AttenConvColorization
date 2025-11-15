@@ -1,7 +1,7 @@
 [
     {
         "type": "Conv2d",
-        "params": {"in_channels": 64, "out_channels": 128, "kernel_size": 5, "padding": 2}
+        "params": {"in_channels": 100, "out_channels": 128, "kernel_size": 5, "padding": 2}
     },
     {
         "type": "InstanceNorm2d",
