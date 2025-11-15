@@ -30,7 +30,7 @@
     "WEIGHTS_PATH": "./weights",
     "PATIENCE": 50,
     "DIAGRAMS_PATH": "./diagrams/color_memory_transformer_full_colorization",
-    "VISUALIZE_EVERY": 1,
+    "VISUALIZE_EVERY": 5,
     "GRADIENT_CLIP": 1.0,
     "RECON_WEIGHT": 0.1,
     "PERCEPTUAL_WEIGHT": 5.0,
