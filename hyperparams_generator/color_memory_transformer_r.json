@@ -8,7 +8,7 @@
     "WEIGHT_DECAY": 0.01,
     "USE_ADAMW": true,
     "B1": 0.9,
-    "B2": 0.999,
+    "B2": 0.99,
     "SCHEDULER_TYPE": "cosine_warm_restarts",
     "GAMMA": 0.99,
     "MIN_LR": 1e-6,
