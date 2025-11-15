@@ -45,20 +45,18 @@ def channelTransform(channel_type: str, image_size: int, output_channels: int, i
             transforms.Resize((image_size, image_size)),
             RGBToLab()
         ])
-
-    elif channel_type == "ab":
+    elif channel_type == "AB":
         if output_channels not in [2, 3]:
             raise ValueError("output_channels must be 2 or 3 for 'ab' channel_type")
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
-            transforms.ToTensor(),
+            RGBToLab(),
             ExtractABChannels(num_output_channels=output_channels)
         ])
-
     elif channel_type == "ab_to_3ch":
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
-            transforms.ToTensor(),
+            RGBToLab(),
             ExtractABChannelsTo3Channel()
         ])
     elif channel_type == "luminance":

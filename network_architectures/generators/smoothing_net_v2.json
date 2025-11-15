@@ -38,9 +38,5 @@
     {
         "type": "Conv2d",
         "params": {"in_channels": 32, "out_channels": 2, "kernel_size": 3, "padding": 1}
-    },
-    {
-        "type": "Sigmoid",
-        "params": {}
     }
 ]
