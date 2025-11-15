@@ -23,7 +23,7 @@
     "STEP_SIZE": 30,
     "STEP_GAMMA": 0.1,
     "IMAGE_RESIZE": 256,
-    "INPUT_CHANNELS": 1,
+    "OUTPUT_CHANNELS": 1,
     "INPUT_CHANNEL": "luminance",
     "EPOCHS": 500,
     "DIAGRAMS_DATA_PATH": "./diagrams_data",
