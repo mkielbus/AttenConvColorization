@@ -6,7 +6,7 @@ from pyaiwrap.metrics import GeneratorColorizationMetrics
 from pyaiwrap.control import GeneratorControlFunc
 from pyaiwrap.generator import loadHyperparameters
 from pyaiwrap.transforms import ToGrayscale, ExtractRedChannel, ExtractGreenChannel, \
-     ExtractBlueChannel, RGBToLab, ExtractABChannels, ExtractABChannelsTo3Channel
+     ExtractBlueChannel, RGBToLAB, ExtractABChannels, ExtractABChannelsTo3Channel
 from pyaiwrap.neural_network import ConvAttenColorizationNetwork
 from pyaiwrap.utils import prepareDevice
 import torch
@@ -43,20 +43,20 @@ def channelTransform(channel_type: str, image_size: int, output_channels: int, i
     elif channel_type == "LAB":
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
-            RGBToLab()
+            RGBToLAB()
         ])
     elif channel_type == "AB":
         if output_channels not in [2, 3]:
             raise ValueError("output_channels must be 2 or 3 for 'ab' channel_type")
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
-            RGBToLab(),
+            RGBToLAB(),
             ExtractABChannels(num_output_channels=output_channels)
         ])
     elif channel_type == "ab_to_3ch":
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
-            RGBToLab(),
+            RGBToLAB(),
             ExtractABChannelsTo3Channel()
         ])
     elif channel_type == "luminance":
