@@ -364,7 +364,6 @@ if __name__ == "__main__":
         print(f"  Train Colorfulness Loss: {history['train_colorfulness_loss'][-1]:.6f}")
         print(f"  Val Colorfulness Loss: {history['val_colorfulness_loss'][-1]:.6f}")
         print(f"  Final Reconstructed: {history['val_colorfulness_recon'][-1]:.2f}")
-        print(f"  Final Original: {history['val_colorfulness_original'][-1]:.2f}")
 
     print(f"\nTotal epochs trained: {result['epochs_trained']}")
     print(f"Early stopping triggered: {result.get('early_stopped', False)}")
