@@ -7,67 +7,9 @@
                     "type": "UNetEncoderBlock",
                     "params": {
                         "in_channels": 3,
-                        "out_channels": 32,
-                        "downsample": true,
-                        "block_name": "enc1"
-                    }
-                },
-                {
-                    "type": "Dropout",
-                    "params": {
-                        "p": 0.1
-                    }
-                },
-                {
-                    "type": "UNetEncoderBlock", 
-                    "params": {
-                        "in_channels": 32,
-                        "out_channels": 64,
-                        "downsample": true,
-                        "block_name": "enc2"
-                    }
-                },
-                {
-                    "type": "Dropout",
-                    "params": {
-                        "p": 0.1
-                    }
-                },
-                {
-                    "type": "UNetEncoderBlock",
-                    "params": {
-                        "in_channels": 64,
-                        "out_channels": 128,
-                        "downsample": true,
-                        "block_name": "enc3"
-                    }
-                },
-                {
-                    "type": "Dropout", 
-                    "params": {
-                        "p": 0.2
-                    }
-                },
-                {
-                    "type": "UNetEncoderBlock",
-                    "params": {
-                        "in_channels": 128,
-                        "out_channels": 256,
+                        "out_channels": 16,
                         "downsample": false,
-                        "block_name": "enc4"
-                    }
-                },
-                {
-                    "type": "Dropout",
-                    "params": {
-                        "p": 0.2
-                    }
-                },
-                {
-                    "type": "UNetBottleneck",
-                    "params": {
-                        "channels": 256,
-                        "bottleneck_channels": 256
+                        "block_name": "enc1"
                     }
                 },
                 {
@@ -77,79 +19,66 @@
                     }
                 },
                 {
+                    "type": "UNetEncoderBlock", 
+                    "params": {
+                        "in_channels": 16,
+                        "out_channels": 32,
+                        "downsample": false,
+                        "block_name": "enc2"
+                    }
+                },
+                {
+                    "type": "Dropout",
+                    "params": {
+                        "p": 0.4
+                    }
+                },
+                {
+                    "type": "UNetBottleneck",
+                    "params": {
+                        "channels": 32,
+                        "bottleneck_channels": 32
+                    }
+                },
+                {
+                    "type": "Dropout", 
+                    "params": {
+                        "p": 0.5
+                    }
+                },
+                {
                     "type": "UNetDecoderBlock",
                     "params": {
-                        "in_channels": 256,
-                        "out_channels": 128,
-                        "upsample": true,
-                        "skip_connection": "enc3",
+                        "in_channels": 32,
+                        "out_channels": 16,
+                        "upsample": false,
+                        "skip_connection": "enc2",
                         "block_name": "dec1"
                     }
                 },
                 {
                     "type": "Dropout",
                     "params": {
-                        "p": 0.2
+                        "p": 0.4
                     }
                 },
                 {
                     "type": "UNetDecoderBlock",
                     "params": {
-                        "in_channels": 128,
-                        "out_channels": 64,
-                        "upsample": true,
-                        "skip_connection": "enc2", 
+                        "in_channels": 16,
+                        "out_channels": 8,
+                        "upsample": false,
+                        "skip_connection": "enc1", 
                         "block_name": "dec2"
                     }
                 },
                 {
-                    "type": "Dropout",
-                    "params": {
-                        "p": 0.1
-                    }
-                },
-                {
-                    "type": "UNetDecoderBlock",
-                    "params": {
-                        "in_channels": 64,
-                        "out_channels": 32,
-                        "upsample": true,
-                        "skip_connection": "enc1",
-                        "block_name": "dec3"
-                    }
-                },
-                {
                     "type": "Conv2d",
                     "params": {
-                        "in_channels": 32,
-                        "out_channels": 16,
-                        "kernel_size": 3,
-                        "padding": 1
-                    }
-                },
-                {
-                    "type": "InstanceNorm2d",
-                    "params": {
-                        "num_features": 16
-                    }
-                },
-                {
-                    "type": "GELU",
-                    "params": {}
-                },
-                {
-                    "type": "Dropout",
-                    "params": {
-                        "p": 0.1
-                    }
-                },
-                {
-                    "type": "Conv2d",
-                    "params": {
-                        "in_channels": 16,
+                        "in_channels": 8,
                         "out_channels": 3,
-                        "kernel_size": 3,
-                        "padding": 1
+                        "kernel_size": 1,
+                        "padding": 0
                     }
                 },
                 {
