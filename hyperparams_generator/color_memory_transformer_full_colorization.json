@@ -38,7 +38,7 @@
     "LPIPS_NET": "alex",
     "COLORFULNESS_WEIGHT": 0.0,
     "COLORFULNESS_TARGET": null,
-    "TARGET_CHANNEL": "ab",
+    "TARGET_CHANNEL": "AB",
     "TARGET_OUTPUT_CHANNELS": 2,
     "SUBMODULES": {}
 }
