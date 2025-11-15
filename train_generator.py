@@ -333,7 +333,9 @@ if __name__ == "__main__":
         colorfulness_target=COLORFULNESS_TARGET,
         use_lpips=USE_LPIPS,
         lpips_net=LPIPS_NET,
-        device=device
+        device=device,
+        target_channel=TARGET_CHANNEL,
+        input_channel=INPUT_CHANNEL
     )
 
     metrics = GeneratorColorizationMetrics(use_colorfulness=COLORFULNESS_WEIGHT > 0,
