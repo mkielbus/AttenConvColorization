@@ -1,6 +1,6 @@
 [
     {
-        "type": "MultiScaleScaledRefinement",
+        "type": "DynamicSpatialWeights",
         "params": {
             "in_channels": 3,
             "hidden_channels": 32
