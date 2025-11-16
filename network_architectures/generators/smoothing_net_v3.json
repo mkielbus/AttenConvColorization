@@ -1,0 +1,42 @@
+[
+    {
+        "type": "Conv2d",
+        "params": {"in_channels": 256, "out_channels": 256, "kernel_size": 5, "padding": 2}
+    },
+    {
+        "type": "InstanceNorm2d",
+        "params": {"num_features": 256}
+    },
+    {
+        "type": "ReLU",
+        "params": {"inplace": true}
+    },
+    {
+        "type": "Conv2d",
+        "params": {"in_channels": 256, "out_channels": 128, "kernel_size": 5, "padding": 2}
+    },
+    {
+        "type": "InstanceNorm2d",
+        "params": {"num_features": 128}
+    },
+    {
+        "type": "ReLU",
+        "params": {"inplace": true}
+    },
+    {
+        "type": "Conv2d",
+        "params": {"in_channels": 128, "out_channels": 32, "kernel_size": 3, "padding": 1}
+    },
+    {
+        "type": "InstanceNorm2d",
+        "params": {"num_features": 32}
+    },
+    {
+        "type": "ReLU",
+        "params": {"inplace": true}
+    },
+    {
+        "type": "Conv2d",
+        "params": {"in_channels": 32, "out_channels": 2, "kernel_size": 3, "padding": 1}
+    }
+]
