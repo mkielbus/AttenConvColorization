@@ -5,7 +5,7 @@
     },
     {
         "type": "GELU",
-        "params": {"inplace": true}
+        "params": {}
     },
     {
         "type": "Conv2d",
@@ -13,7 +13,7 @@
     },
     {
         "type": "GELU",
-        "params": {"inplace": true}
+        "params": {}
     },
     {
         "type": "Conv2d",
@@ -21,7 +21,7 @@
     },
     {
         "type": "GELU",
-        "params": {"inplace": true}
+        "params": {}
     },
     {
         "type": "Conv2d",
