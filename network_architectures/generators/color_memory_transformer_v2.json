@@ -11,7 +11,7 @@
             "patch_size": 4,
             "memory_size": 100,
             "smoothing_config_path": "network_architectures/generators/smoothing_net_v2.json",
-            "encoder_config_path": "luminance_encoder_v1.json"
+            "encoder_config_path": "network_architectures/generators/luminance_encoder_v1.json"
         }
     }
 ]
