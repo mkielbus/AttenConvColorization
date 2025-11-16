@@ -1,0 +1,17 @@
+[
+    {
+        "type": "ColorMemoryTransformer",
+        "params": {
+            "embed_dim": 128,
+            "num_heads": 2,
+            "mlp_ratio": 4,
+            "dropout": 0.1,
+            "pixel_decoder_layers": 4,
+            "color_decoder_layers": 4,
+            "patch_size": 4,
+            "memory_size": 100,
+            "smoothing_config_path": "network_architectures/generators/smoothing_net_v3.json",
+            "encoder_config_path": "network_architectures/generators/luminance_encoder_v1.json"
+        }
+    }
+]
