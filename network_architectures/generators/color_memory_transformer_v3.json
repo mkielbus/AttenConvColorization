@@ -6,10 +6,12 @@
             "num_heads": 2,
             "mlp_ratio": 4,
             "dropout": 0.1,
-            "num_layers": 9,
+            "pixel_decoder_layers": 4,
+            "color_decoder_layers": 9,
             "patch_size": 4,
             "memory_size": 256,
-            "smoothing_config_path": "network_architectures/generators/smoothing_net_v3.json"
+            "smoothing_config_path": "network_architectures/generators/smoothing_net_v3.json",
+            "encoder_config_path": "luminance_encoder_v1.json"
         }
     }
 ]

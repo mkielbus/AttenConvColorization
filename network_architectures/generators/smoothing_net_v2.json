@@ -4,11 +4,7 @@
         "params": {"in_channels": 100, "out_channels": 128, "kernel_size": 5, "padding": 2}
     },
     {
-        "type": "InstanceNorm2d",
-        "params": {"num_features": 128}
-    },
-    {
-        "type": "ReLU",
+        "type": "GeLU",
         "params": {"inplace": true}
     },
     {
@@ -16,11 +12,7 @@
         "params": {"in_channels": 128, "out_channels": 64, "kernel_size": 5, "padding": 2}
     },
     {
-        "type": "InstanceNorm2d",
-        "params": {"num_features": 64}
-    },
-    {
-        "type": "ReLU",
+        "type": "GeLU",
         "params": {"inplace": true}
     },
     {
@@ -28,11 +20,7 @@
         "params": {"in_channels": 64, "out_channels": 32, "kernel_size": 3, "padding": 1}
     },
     {
-        "type": "InstanceNorm2d",
-        "params": {"num_features": 32}
-    },
-    {
-        "type": "ReLU",
+        "type": "GeLU",
         "params": {"inplace": true}
     },
     {
