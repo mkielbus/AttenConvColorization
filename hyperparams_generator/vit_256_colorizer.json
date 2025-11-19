@@ -32,7 +32,7 @@
     "GRADIENT_CLIP": 1.0,
     "RECON_WEIGHT": 0.1,
     "PERCEPTUAL_WEIGHT": 5.0,
-    "USE_LPIPS": false,
+    "USE_LPIPS": true,
     "LPIPS_NET": "alex",
     "COLORFULNESS_WEIGHT": 0.005,
     "COLORFULNESS_TARGET": null,
