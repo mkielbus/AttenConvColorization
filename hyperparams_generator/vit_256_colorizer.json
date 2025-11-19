@@ -26,7 +26,7 @@
     "EPOCHS": 500,
     "DIAGRAMS_DATA_PATH": "./diagrams_data",
     "WEIGHTS_PATH": "./weights",
-    "PATIENCE": 50,
+    "PATIENCE": 100,
     "DIAGRAMS_PATH": "./diagrams/vit_256_colorization",
     "VISUALIZE_EVERY": 5,
     "GRADIENT_CLIP": 1.0,
@@ -36,6 +36,6 @@
     "LPIPS_NET": "alex",
     "COLORFULNESS_WEIGHT": 0.0,
     "COLORFULNESS_TARGET": null,
-    "TARGET_CHANNEL": "RGB",
-    "TARGET_OUTPUT_CHANNELS": 3
+    "TARGET_CHANNEL": "AB",
+    "TARGET_OUTPUT_CHANNELS": 2
 }
