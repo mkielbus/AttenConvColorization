@@ -2,13 +2,13 @@
     {
         "type": "ColorizationTransformerNet",
         "params": {
-            "embed_dim": 256,
-            "num_layers": 6,  
+            "embed_dim": 512,
+            "num_layers": 3,  
             "num_heads": 2,
             "mlp_ratio": 2,
             "dropout": 0.1,
-            "patch_size": 4,
             "num_color_tokens": 4096,
+            "num_image_patches": 4096,
             "image_size": 256,
             "only_use_encoder": false,
             "use_decoder_masking": false,
@@ -20,20 +20,12 @@
         "params": {"in_channels": 32, "out_channels": 64, "kernel_size": 7, "padding": 3}
     },
     {
-        "type": "InstanceNorm2d",
-        "params": {"num_features": 64}
-    },
-    {
         "type": "ReLU",
         "params": {"inplace": true}
     },
     {
         "type": "Conv2d", 
         "params": {"in_channels": 64, "out_channels": 32, "kernel_size": 5, "padding": 2}
-    },
-    {
-        "type": "InstanceNorm2d",
-        "params": {"num_features": 32}
     },
     {
         "type": "ReLU",
