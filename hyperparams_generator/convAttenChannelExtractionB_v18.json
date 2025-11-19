@@ -30,9 +30,10 @@
     "DIAGRAMS_PATH": "./diagrams/convAttenChannelExtractionB_v18",
     "VISUALIZE_EVERY": 5,
     "GRADIENT_CLIP": 1.0,
-    "PERCEPTUAL_WEIGHT": 0,
+    "RECON_WEIGHT": 0.1,
+    "PERCEPTUAL_WEIGHT": 5.0,
     "USE_LPIPS": false,
-    "LPIPS_NET": "alex",
+    "LPIPS_NET": "true",
     "COLORFULNESS_WEIGHT": 0,
     "COLORFULNESS_TARGET": null,
     "TARGET_CHANNEL": "B"
