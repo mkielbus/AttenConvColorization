@@ -3,12 +3,14 @@
         "type": "ColorizationTransformerNet", 
         "params": {
             "embed_dim": 256,
-            "num_layers": 8,
+            "num_layers": 6,
             "num_heads": 2,
             "mlp_ratio": 4,
             "dropout": 0.1,
             "patch_size": 4,
-            "only_use_encoder": true,
+            "image_size": 256,
+            "num_color_tokens": 4096,
+            "only_use_encoder": false,
             "use_decoder_masking": false,
             "output_channels": 64
         }
