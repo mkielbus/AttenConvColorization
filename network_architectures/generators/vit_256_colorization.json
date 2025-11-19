@@ -3,7 +3,7 @@
         "type": "ColorizationTransformerNet",
         "params": {
             "embed_dim": 512,
-            "num_layers": 3,  
+            "num_layers": 5,  
             "num_heads": 2,
             "mlp_ratio": 2,
             "dropout": 0.1,
@@ -12,27 +12,39 @@
             "image_size": 256,
             "only_use_encoder": false,
             "use_decoder_masking": false,
-            "output_channels": 32
+            "output_channels": 512
         }
     },
     {
         "type": "Conv2d",
-        "params": {"in_channels": 32, "out_channels": 64, "kernel_size": 7, "padding": 3}
+        "params": {"in_channels": 512, "out_channels": 256, "kernel_size": 7, "padding": 3}
     },
     {
-        "type": "ReLU",
+        "type": "GELU",
         "params": {"inplace": true}
     },
     {
         "type": "Conv2d", 
-        "params": {"in_channels": 64, "out_channels": 32, "kernel_size": 5, "padding": 2}
+        "params": {"in_channels": 256, "out_channels": 128, "kernel_size": 5, "padding": 2}
     },
     {
-        "type": "ReLU",
+        "type": "GELU",
         "params": {"inplace": true}
     },
     {
         "type": "Conv2d",
+        "params": {"in_channels": 128, "out_channels": 64, "kernel_size": 3, "padding": 1}
+    },
+    {
+        "type": "Conv2d", 
+        "params": {"in_channels": 64, "out_channels": 32, "kernel_size": 3, "padding": 1}
+    },
+    {
+        "type": "GELU",
+        "params": {"inplace": true}
+    },
+    {
+        "type": "Conv2d", 
         "params": {"in_channels": 32, "out_channels": 2, "kernel_size": 3, "padding": 1}
     },
     {
