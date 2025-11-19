@@ -36,5 +36,6 @@
     "LPIPS_NET": "true",
     "COLORFULNESS_WEIGHT": 0,
     "COLORFULNESS_TARGET": null,
-    "TARGET_CHANNEL": "B"
+    "TARGET_CHANNEL": "B",
+    "TARGET_OUTPUT_CHANNELS": 1
 }
