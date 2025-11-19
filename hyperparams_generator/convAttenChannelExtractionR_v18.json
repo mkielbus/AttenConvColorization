@@ -36,5 +36,6 @@
     "LPIPS_NET": "alex",
     "COLORFULNESS_WEIGHT": 0,
     "COLORFULNESS_TARGET": null,
-    "TARGET_CHANNEL": "R"
+    "TARGET_CHANNEL": "R",
+    "TARGET_OUTPUT_CHANNELS": 1
 }
