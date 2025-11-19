@@ -30,7 +30,7 @@
     "DIAGRAMS_PATH": "./diagrams/convAttenChannelExtractionG_v18",
     "VISUALIZE_EVERY": 5,
     "GRADIENT_CLIP": 1.0,
-    "RECON_WEIGHT": 1.0
+    "RECON_WEIGHT": 1.0,
     "PERCEPTUAL_WEIGHT": 0,
     "USE_LPIPS": false,
     "LPIPS_NET": "alex",
