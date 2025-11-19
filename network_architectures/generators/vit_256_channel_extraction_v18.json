@@ -9,8 +9,7 @@
             "dropout": 0.1,
             "patch_size": 4,
             "image_size": 256,
-            "num_color_tokens": 4096,
-            "only_use_encoder": false,
+            "only_use_encoder": true,
             "use_decoder_masking": false,
             "output_channels": 64
         }
