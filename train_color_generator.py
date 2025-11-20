@@ -59,13 +59,13 @@ def printTrainingConfiguration(config, launch_number):
     print(f"Optimizer type: {config.get('OPTIMIZER_TYPE', 'adam')}")
     print(f"Scheduler type: {config.get('SCHEDULER_TYPE', 'exponential')}")
     print("\nLoss Configuration:")
-    print(f"  Perceptual Weight: {config['PERCEPTUAL_WEIGHT']}")
-    print(f"  Use LPIPS: {config['USE_LPIPS']}")
-    if config['USE_LPIPS']:
-        print(f"  LPIPS Network: {config['LPIPS_NET']}")
-    print(f"  Colorfulness Weight: {config['COLORFULNESS_WEIGHT']}")
-    if config['COLORFULNESS_TARGET'] is not None:
-        print(f"  Colorfulness Target: {config['COLORFULNESS_TARGET']}")
+    print(f"  Perceptual Weight: {config.get('PERCEPTUAL_WEIGHT', 0.0)}")
+    print(f"  Use LPIPS: {config.get('USE_LPIPS', False)}")
+    if config.get('USE_LPIPS', False):
+        print(f"  LPIPS Network: {config.get('LPIPS_NET', 'alex')}")
+    print(f"  Colorfulness Weight: {config.get('COLORFULNESS_WEIGHT', 0.0)}")
+    if config.get('COLORFULNESS_TARGET', None) is not None:
+        print(f"  Colorfulness Target: {config.get('COLORFULNESS_TARGET', None)}")
     else:
         print("  Colorfulness Target: Match Original")
 
