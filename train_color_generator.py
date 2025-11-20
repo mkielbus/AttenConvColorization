@@ -142,7 +142,7 @@ def createLossFunction(config, device):
         recon_weight=config["RECON_WEIGHT"],
         perceptual_weight=config.get("PERCEPTUAL_WEIGHT", 0.0),
         colorfulness_weight=config.get("COLORFULNESS_WEIGHT", 0.0),
-        colorfulness_target=config("COLORFULNESS_TARGET", 0.0),
+        colorfulness_target=config.get("COLORFULNESS_TARGET", 0.0),
         use_lpips=config.get("USE_LPIPS", False),
         lpips_net=config.get("LPIPS_NET", "alex"),
         device=device,
