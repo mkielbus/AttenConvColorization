@@ -175,8 +175,7 @@ if __name__ == "__main__":
     scheduler = createScheduler(
         optimizer=optimizer,
         hyperparams=hyperparams,
-        train_loader_len=len(train_loader),
-        epochs=EPOCHS
+        train_loader_len=len(train_loader)
     )
     schedulers = {'generator': scheduler}
 
