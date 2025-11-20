@@ -5,158 +5,16 @@ from pyaiwrap.loss import GeneratorColorizationLoss
 from pyaiwrap.metrics import GeneratorColorizationMetrics
 from pyaiwrap.control import GeneratorControlFunc
 from pyaiwrap.generator import loadHyperparameters
-from pyaiwrap.transforms import ToGrayscale, ExtractRedChannel, ExtractGreenChannel, \
-     ExtractBlueChannel, RGBToLAB, ExtractABChannels, ExtractABChannelsTo3Channel
+from pyaiwrap.transforms import channelTransform
+from pyaiwrap.schedulers import createScheduler
 from pyaiwrap.neural_network import ConvAttenColorizationNetwork
 from pyaiwrap.utils import prepareDevice
 import torch
 import torch.nn as nn
-import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 import argparse
-from typing import Dict, Any
 import warnings
 warnings.filterwarnings('ignore', category=UserWarning, module='torchvision')
-
-
-def channelTransform(channel_type: str, image_size: int, output_channels: int, is_input: bool = True) -> transforms.Compose:
-    """
-    Get the appropriate transform for input or target channels.
-
-    Args:
-        channel_type: Channel type ("luminance", "R", "G", "B", or "RGB")
-        image_size: Size to resize images to
-        output_channels: Number of output channels (1 or 3)
-        is_input: Whether this is for input (True) or target (False)
-
-    Returns:
-        Transform composition
-
-    Raises:
-        ValueError: If channel_type is invalid
-    """
-    if channel_type == "RGB":
-        transform = transforms.Compose([
-            transforms.Resize((image_size, image_size)),
-            transforms.ToTensor()
-        ])
-    elif channel_type == "LAB":
-        transform = transforms.Compose([
-            transforms.Resize((image_size, image_size)),
-            RGBToLAB()
-        ])
-    elif channel_type == "AB":
-        if output_channels not in [2, 3]:
-            raise ValueError("output_channels must be 2 or 3 for 'ab' channel_type")
-        transform = transforms.Compose([
-            transforms.Resize((image_size, image_size)),
-            RGBToLAB(),
-            ExtractABChannels(num_output_channels=output_channels)
-        ])
-    elif channel_type == "ab_to_3ch":
-        transform = transforms.Compose([
-            transforms.Resize((image_size, image_size)),
-            RGBToLAB(),
-            ExtractABChannelsTo3Channel()
-        ])
-    elif channel_type == "luminance":
-        if not is_input:
-            raise ValueError("luminance can only be used for input channels, not target channels")
-        transform = transforms.Compose([
-            transforms.Resize((image_size, image_size)),
-            ToGrayscale(num_output_channels=output_channels),
-            transforms.ToTensor()
-        ])
-
-    elif channel_type == "R":
-        transform = transforms.Compose([
-            transforms.Resize((image_size, image_size)),
-            transforms.ToTensor(),
-            ExtractRedChannel(num_output_channels=output_channels)
-        ])
-
-    elif channel_type == "G":
-        transform = transforms.Compose([
-            transforms.Resize((image_size, image_size)),
-            transforms.ToTensor(),
-            ExtractGreenChannel(num_output_channels=output_channels)
-        ])
-
-    elif channel_type == "B":
-        transform = transforms.Compose([
-            transforms.Resize((image_size, image_size)),
-            transforms.ToTensor(),
-            ExtractBlueChannel(num_output_channels=output_channels)
-        ])
-
-    else:
-        raise ValueError(f"channel_type must be 'luminance', 'R', 'G', 'B', or 'RGB', got '{channel_type}'")
-
-    return transform
-
-
-def createScheduler(optimizer, hyperparams: Dict[str, Any], train_loader_len: int, epochs: int):
-    """
-    Create learning rate scheduler based on hyperparameters.
-
-    Args:
-        optimizer: The optimizer to schedule
-        hyperparams: Dictionary of hyperparameters
-        train_loader_len: Length of train loader (steps per epoch)
-        epochs: Total number of epochs
-
-    Returns:
-        Configured learning rate scheduler
-    """
-    scheduler_type = hyperparams.get("SCHEDULER_TYPE", "exponential")
-    learning_rate = hyperparams.get("LEARNING_RATE", 0.0001)
-    min_lr = hyperparams.get("MIN_LR", 1e-6)
-    gamma = hyperparams.get("GAMMA", 0.99)
-
-    if scheduler_type == "cosine_warm_restarts":
-        scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(
-            optimizer,
-            T_0=hyperparams.get("T_0", 30),
-            T_mult=hyperparams.get("T_MULT", 2),
-            eta_min=min_lr
-        )
-        print(f"Using CosineAnnealingWarmRestarts (T_0={hyperparams.get('T_0', 30)}, T_mult={hyperparams.get('T_MULT', 2)})")
-
-    elif scheduler_type == "onecycle":
-        scheduler = torch.optim.lr_scheduler.OneCycleLR(
-            optimizer,
-            max_lr=learning_rate * hyperparams.get("MAX_LR_MULTIPLIER", 10),
-            epochs=epochs,
-            steps_per_epoch=train_loader_len,
-            pct_start=hyperparams.get("PCT_START", 0.1),
-            div_factor=hyperparams.get("DIV_FACTOR", 10),
-            final_div_factor=hyperparams.get("FINAL_DIV_FACTOR", 100)
-        )
-        print(f"Using OneCycleLR (max_lr={learning_rate * hyperparams.get('MAX_LR_MULTIPLIER', 10):.2e})")
-
-    elif scheduler_type == "cosine":
-        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
-            optimizer,
-            T_max=epochs,
-            eta_min=min_lr
-        )
-        print("Using CosineAnnealingLR")
-
-    elif scheduler_type == "step":
-        scheduler = torch.optim.lr_scheduler.StepLR(
-            optimizer,
-            step_size=hyperparams.get("STEP_SIZE", 30),
-            gamma=hyperparams.get("STEP_GAMMA", 0.1)
-        )
-        print(f"Using StepLR (step_size={hyperparams.get('STEP_SIZE', 30)}, gamma={hyperparams.get('STEP_GAMMA', 0.1)})")
-
-    else:
-        scheduler = torch.optim.lr_scheduler.ExponentialLR(
-            optimizer,
-            gamma=gamma
-        )
-        print(f"Using ExponentialLR (gamma={gamma})")
-    return scheduler
 
 
 def parseCMDArgs():
@@ -198,7 +56,6 @@ if __name__ == "__main__":
     DIAGRAMS_DATA_PATH = hyperparams["DIAGRAMS_DATA_PATH"]
     WEIGHTS_PATH = hyperparams["WEIGHTS_PATH"]
     LEARNING_RATE = hyperparams["LEARNING_RATE"]
-    GAMMA = hyperparams["GAMMA"]
     PATIENCE = hyperparams["PATIENCE"]
     DIAGRAMS_PATH = hyperparams["DIAGRAMS_PATH"]
     VISUALIZE_EVERY = hyperparams["VISUALIZE_EVERY"]
