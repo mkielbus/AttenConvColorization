@@ -20,7 +20,7 @@
     "EPOCHS": 500,
     "DIAGRAMS_DATA_PATH": "./diagrams_data",
     "WEIGHTS_PATH": "./weights",
-    "PATIENCE": 100,
+    "PATIENCE": 500,
     "DIAGRAMS_PATH": "./diagrams/rgb_merge_unet",
     "VISUALIZE_EVERY": 5,
     "GRADIENT_CLIP": 1.0,
