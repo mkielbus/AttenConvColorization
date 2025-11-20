@@ -96,7 +96,7 @@ def createDataLoaders(config):
         shuffle=True,
         drop_last=True,
         pin_memory=True,
-        num_workers=4
+        num_workers=8
     )
     validation_loader = DataLoader(
         validation_dataset,
@@ -104,7 +104,7 @@ def createDataLoaders(config):
         shuffle=False,
         drop_last=True,
         pin_memory=True,
-        num_workers=4
+        num_workers=8
     )
 
     return train_loader, validation_loader, len(train_dataset), len(validation_dataset)
@@ -140,11 +140,11 @@ def createLossFunction(config, device):
     loss_fn = GeneratorColorizationLoss(
         reconstruction_loss_fn=nn.L1Loss(),
         recon_weight=config["RECON_WEIGHT"],
-        perceptual_weight=config["PERCEPTUAL_WEIGHT"],
-        colorfulness_weight=config["COLORFULNESS_WEIGHT"],
-        colorfulness_target=config["COLORFULNESS_TARGET"],
-        use_lpips=config["USE_LPIPS"],
-        lpips_net=config["LPIPS_NET"],
+        perceptual_weight=config.get("PERCEPTUAL_WEIGHT", 0.0),
+        colorfulness_weight=config.get("COLORFULNESS_WEIGHT", 0.0),
+        colorfulness_target=config("COLORFULNESS_TARGET", 0.0),
+        use_lpips=config.get("USE_LPIPS", False),
+        lpips_net=config.get("LPIPS_NET", "alex"),
         device=device,
         target_channel=config["TARGET_CHANNEL"],
         input_channel=config["INPUT_CHANNEL"]
@@ -155,8 +155,8 @@ def createLossFunction(config, device):
 def createMetrics(config):
     """Create metrics object."""
     metrics = GeneratorColorizationMetrics(
-        use_colorfulness=config["COLORFULNESS_WEIGHT"] > 0,
-        use_perceptual_loss=config["PERCEPTUAL_WEIGHT"] > 0
+        use_colorfulness=config.get("COLORFULNESS_WEIGHT", 0.0) > 0,
+        use_perceptual_loss=config.get("PERCEPTUAL_WEIGHT", 0.0) > 0
     )
     return metrics
 
