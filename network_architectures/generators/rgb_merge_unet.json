@@ -7,7 +7,7 @@
                     "type": "UNetEncoderBlock",
                     "params": {
                         "in_channels": 3,
-                        "out_channels": 32,
+                        "out_channels": 64,
                         "downsample": true,
                         "block_name": "enc1"
                     }
@@ -15,8 +15,8 @@
                 {
                     "type": "UNetEncoderBlock", 
                     "params": {
-                        "in_channels": 32,
-                        "out_channels": 64,
+                        "in_channels": 64,
+                        "out_channels": 128,
                         "downsample": true,
                         "block_name": "enc2"
                     }
@@ -24,8 +24,8 @@
                 {
                     "type": "UNetEncoderBlock",
                     "params": {
-                        "in_channels": 64,
-                        "out_channels": 128,
+                        "in_channels": 128,
+                        "out_channels": 256,
                         "downsample": false,
                         "block_name": "enc3"
                     }
@@ -33,15 +33,15 @@
                 {
                     "type": "UNetBottleneck",
                     "params": {
-                        "channels": 128,
-                        "bottleneck_channels": 128
+                        "channels": 256,
+                        "bottleneck_channels": 512
                     }
                 },
                 {
                     "type": "UNetDecoderBlock",
                     "params": {
-                        "in_channels": 128,
-                        "out_channels": 128,
+                        "in_channels": 256,
+                        "out_channels": 256,
                         "upsample": false,
                         "skip_connection": "enc3",
                         "block_name": "dec1"
@@ -50,8 +50,8 @@
                 {
                     "type": "UNetDecoderBlock",
                     "params": {
-                        "in_channels": 128,
-                        "out_channels": 64,
+                        "in_channels": 256,
+                        "out_channels": 128,
                         "upsample": true,
                         "skip_connection": "enc2", 
                         "block_name": "dec2"
@@ -60,8 +60,8 @@
                 {
                     "type": "UNetDecoderBlock",
                     "params": {
-                        "in_channels": 64,
-                        "out_channels": 32,
+                        "in_channels": 128,
+                        "out_channels": 64,
                         "upsample": true,
                         "skip_connection": "enc1",
                         "block_name": "dec3"
@@ -70,7 +70,7 @@
                 {
                     "type": "Conv2d",
                     "params": {
-                        "in_channels": 32,
+                        "in_channels": 64,
                         "out_channels": 3,
                         "kernel_size": 3,
                         "padding": 1
