@@ -54,20 +54,20 @@ def printTrainingConfiguration(config, launch_number):
     print(f"Epochs: {config['EPOCHS']}")
     print(f"Patience: {config['PATIENCE']}")
     print(f"Gradient Clip: {config['GRADIENT_CLIP']}")
-    print(f"Training type: {config['TRAINING_TYPE']}")
     print(f"Weight Decay: {config['WEIGHT_DECAY']}")
     print(f"Optimizer type: {config['OPTIMIZER_TYPE']}")
     print(f"Scheduler type: {config['SCHEDULER_TYPE']}")
     print("\nLoss Configuration:")
-    if "perceptual" in config.get('LOSS_TYPES', []):
+    if "perceptual" in config['LOSS_TYPES']:
         print(f"  Perceptual Weight: {config['PERCEPTUAL_WEIGHT']}")
         print(f"  Use LPIPS: {config['USE_LPIPS']}")
         print(f"  LPIPS Network: {config['LPIPS_NET']}")
-    print(f"  Colorfulness Weight: {config['COLORFULNESS_WEIGHT']}")
-    if config.get('COLORFULNESS_TARGET', None) is not None:
-        print(f"  Colorfulness Target: {config.get('COLORFULNESS_TARGET', None)}")
-    else:
-        print("  Colorfulness Target: Match Original")
+    if "colorfulness" in config['LOSS_TYPES']:
+        print(f"  Colorfulness Weight: {config['COLORFULNESS_WEIGHT']}")
+        if config['COLORFULNESS_TARGET'] is not None:
+            print(f"  Colorfulness Target: {config['COLORFULNESS_TARGET']}")
+        else:
+            print("  Colorfulness Target: Match Original")
 
 
 def createDataLoaders(config):
