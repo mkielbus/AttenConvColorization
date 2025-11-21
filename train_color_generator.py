@@ -58,6 +58,8 @@ def printTrainingConfiguration(config, launch_number):
     print(f"Optimizer type: {config['OPTIMIZER_TYPE']}")
     print(f"Scheduler type: {config['SCHEDULER_TYPE']}")
     print("\nLoss Configuration:")
+    print(f"  Loss Types: {config['LOSS_TYPES']}")
+    print(f"  Reconstruction Weight: {config['RECON_WEIGHT']}")
     if "perceptual" in config['LOSS_TYPES']:
         print(f"  Perceptual Weight: {config['PERCEPTUAL_WEIGHT']}")
         print(f"  Use LPIPS: {config['USE_LPIPS']}")
