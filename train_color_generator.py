@@ -3,7 +3,7 @@ from pyaiwrap.datasets import PairedImageFolder
 from pyaiwrap.loss import GeneratorColorizationLoss
 from pyaiwrap.metrics import GeneratorColorizationMetrics
 from pyaiwrap.control import GeneratorControlFunc
-from pyaiwrap.config import loadHyperparameters
+from pyaiwrap.config import loadConfig
 from pyaiwrap.transforms import ChannelTransformCreator
 from pyaiwrap.optimizers import createOptimizer
 from pyaiwrap.schedulers import createScheduler
@@ -19,11 +19,11 @@ warnings.filterwarnings('ignore', category=UserWarning, module='torchvision')
 def parseCMDArgs():
     parser = argparse.ArgumentParser(description="Train generator model with configurable hyperparameters.")
     parser.add_argument(
-        "--hyperparams",
+        "--config",
         type=str,
         required=False,
         default="./hyperparams_generator/0.json",
-        help="Path to the JSON file containing hyperparameters"
+        help="Path to the JSON file containing configuration for training."
     )
     parser.add_argument(
         "--launch_number",
@@ -198,29 +198,29 @@ if __name__ == "__main__":
     device = prepareDevice()
     args = parseCMDArgs()
 
-    hyperparams = loadHyperparameters(args.hyperparams)
+    config = loadConfig(args.config)
 
-    printTrainingConfiguration(hyperparams, args.launch_number)
+    printTrainingConfiguration(config, args.launch_number)
 
-    train_loader, validation_loader, train_samples, val_samples = createDataLoaders(hyperparams)
+    train_loader, validation_loader, train_samples, val_samples = createDataLoaders(config)
     print(f"Training samples: {train_samples}")
     print(f"Validation samples: {val_samples}\n")
 
     print("Building generator model...")
-    generator, total_params, trainable_params = createGeneratorModel(hyperparams, device)
+    generator, total_params, trainable_params = createGeneratorModel(config, device)
     print(f"Total parameters: {total_params:,}")
     print(f"Trainable parameters: {trainable_params:,}\n")
 
-    optimizer = prepareOptimizer(generator.parameters(), hyperparams)
+    optimizer = prepareOptimizer(generator.parameters(), config)
     optimizers = {'generator': optimizer}
 
-    scheduler = prepareScheduler(optimizer, hyperparams, len(train_loader))
+    scheduler = prepareScheduler(optimizer, config, len(train_loader))
     schedulers = {'generator': scheduler}
 
     models = {'generator': generator}
 
-    loss_fn = createLossFunction(hyperparams, device)
-    metrics = createMetrics(hyperparams)
+    loss_fn = createLossFunction(config, device)
+    metrics = createMetrics(config)
 
     print("Starting training...\n")
     result = train(
@@ -232,21 +232,21 @@ if __name__ == "__main__":
         metrics=metrics,
         schedulers=schedulers,
         device=device,
-        num_epochs=hyperparams["EPOCHS"],
-        diagrams_data_path=hyperparams["DIAGRAMS_DATA_PATH"],
-        hyperparams_id=hyperparams["HYPERPARAMS_ID"],
-        weights_path=hyperparams["WEIGHTS_PATH"],
-        diagrams_path=hyperparams["DIAGRAMS_PATH"],
+        num_epochs=config["EPOCHS"],
+        diagrams_data_path=config["DIAGRAMS_DATA_PATH"],
+        hyperparams_id=config["HYPERPARAMS_ID"],
+        weights_path=config["WEIGHTS_PATH"],
+        diagrams_path=config["DIAGRAMS_PATH"],
         launch_number=args.launch_number,
-        visualize_every_xth_epoch=hyperparams["VISUALIZE_EVERY"],
-        max_patience=hyperparams["PATIENCE"],
+        visualize_every_xth_epoch=config["VISUALIZE_EVERY"],
+        max_patience=config["PATIENCE"],
         model_type="custom",
-        gradient_clip=hyperparams["GRADIENT_CLIP"],
+        gradient_clip=config["GRADIENT_CLIP"],
         control_fn=GeneratorControlFunc(
-            target_channel=hyperparams["TARGET_CHANNEL"],
-            input_channel=hyperparams["INPUT_CHANNEL"]
+            target_channel=config["TARGET_CHANNEL"],
+            input_channel=config["INPUT_CHANNEL"]
         ),
         early_stopping_metric="total_loss"
     )
 
-    printFinalResults(result, metrics, hyperparams, optimizers['generator'])
+    printFinalResults(result, metrics, config, optimizers['generator'])
