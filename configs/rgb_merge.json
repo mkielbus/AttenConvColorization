@@ -15,7 +15,6 @@
     "LOSS_TYPES": ["reconstruction", "perceptual", "colorfulness"],
     "B1": 0.9,
     "B2": 0.99,
-    "GAMMA": 0.99,
     "MIN_LR": 1e-6,
     "T_0": 30,
     "T_MULT": 2,
