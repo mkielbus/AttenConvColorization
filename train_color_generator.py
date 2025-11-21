@@ -112,7 +112,7 @@ def createDataLoaders(config):
 
 def createGeneratorModel(config, device):
     """Create and return the generator model."""
-    generator = createGenerator(hyperparams=config, device=device)
+    generator = createGenerator(config=config, device=device)
     total_params = sum(p.numel() for p in generator.parameters())
     trainable_params = sum(p.numel() for p in generator.parameters() if p.requires_grad)
 
@@ -129,7 +129,7 @@ def prepareScheduler(optimizer, config, train_loader_len):
     """Create scheduler."""
     scheduler = createScheduler(
         optimizer=optimizer,
-        hyperparams=config,
+        config=config,
         train_loader_len=train_loader_len
     )
     return scheduler
