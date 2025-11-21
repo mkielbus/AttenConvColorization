@@ -24,7 +24,7 @@
     "EPOCHS": 500,
     "DIAGRAMS_DATA_PATH": "./diagrams_data",
     "WEIGHTS_PATH": "./weights",
-    "PATIENCE": 50,
+    "PATIENCE": 500,
     "DIAGRAMS_PATH": "./diagrams/color_memory_transformer_full_colorization",
     "VISUALIZE_EVERY": 5,
     "GRADIENT_CLIP": 1.0,
