@@ -8,8 +8,8 @@
             "dropout": 0.1,
             "color_decoder_layers": 9,
             "memory_size": 100,
-            "smoothing_config_path": "network_architectures/generators/smoothing_net_v1.json",
-            "encoder_config_path": "network_architectures/generators/luminance_encoder_v1.json"
+            "smoothing_config_path": "network_architectures/generators/smoothing_net.json",
+            "encoder_config_path": "network_architectures/generators/luminance_encoder.json"
         }
     }
 ]
