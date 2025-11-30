@@ -35,7 +35,6 @@
     }
   },
 
-
   { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 512, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 512, "bias": true } },
   { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 768, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
   { "type": "Conv2d", "params": { "in_channels": 768, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
@@ -63,40 +62,40 @@
 
 
   { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 512, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 512, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1536, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 1536, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  
-  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 512, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 512, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1536, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 1536, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  
-  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 512, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 512, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1536, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 1536, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1024, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 1024, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
 
   { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 512, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 512, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1536, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 1536, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  
-  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 512, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 512, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1536, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 1536, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1024, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 1024, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
 
   { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 512, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 512, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1536, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 1536, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1024, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 1024, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
 
   { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 512, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 512, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1536, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 1536, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1024, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 1024, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
 
   { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 512, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 512, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1536, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 1536, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1024, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 1024, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
 
   { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 512, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 512, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1536, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 1536, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1024, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 1024, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+
+  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 512, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 512, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1024, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 1024, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+
+  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 512, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 512, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1024, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 1024, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+
+  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 512, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 512, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 512, "out_channels": 1024, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 1024, "out_channels": 512, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
 
 
   {
@@ -113,18 +112,18 @@
 
 
   { "type": "Conv2d", "params": { "in_channels": 256, "out_channels": 256, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 256, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 256, "out_channels": 3072, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 3072, "out_channels": 256, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 256, "out_channels": 1024, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 1024, "out_channels": 256, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
 
 
   { "type": "Conv2d", "params": { "in_channels": 256, "out_channels": 256, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 256, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 256, "out_channels": 3072, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 3072, "out_channels": 256, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  
+  { "type": "Conv2d", "params": { "in_channels": 256, "out_channels": 1024, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 1024, "out_channels": 256, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+
 
   { "type": "Conv2d", "params": { "in_channels": 256, "out_channels": 256, "kernel_size": 7, "stride": 1, "padding": 3, "groups": 256, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 256, "out_channels": 3072, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
-  { "type": "Conv2d", "params": { "in_channels": 3072, "out_channels": 256, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 256, "out_channels": 1024, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
+  { "type": "Conv2d", "params": { "in_channels": 1024, "out_channels": 256, "kernel_size": 1, "stride": 1, "padding": 0, "bias": true } },
 
 
   {
