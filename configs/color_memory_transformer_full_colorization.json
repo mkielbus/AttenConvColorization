@@ -12,7 +12,7 @@
     "DATA_TYPE": "colorization",
     "OUTPUT_TYPE": "standard",
     "SCHEDULER_TYPE": "cosine_warm_restarts",
-    "LOSS_TYPES": ["reconstruction", "perceptual"],
+    "LOSS_TYPES": ["reconstruction", "perceptual", "colorfulness"],
     "B1": 0.9,
     "B2": 0.99,
     "MIN_LR": 1e-6,
@@ -32,6 +32,8 @@
     "PERCEPTUAL_WEIGHT": 5.0,
     "USE_LPIPS": true,
     "LPIPS_NET": "alex",
+    "COLORFULNESS_WEIGHT": 0.005,
+    "COLORFULNESS_TARGET": null,
     "TARGET_CHANNEL": "AB",
     "TARGET_OUTPUT_CHANNELS": 2,
     "SUBMODULES": {}
