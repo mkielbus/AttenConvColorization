@@ -1,7 +1,7 @@
 {
     "BATCH_SIZE": 3,
-    "TRAIN_DATA_PATH": "./data/DIV2K_train_LR_bicubic/X4",
-    "VALIDATION_DATA_PATH": "./data/DIV2K_valid_LR_bicubic/X4",
+    "TRAIN_DATA_PATH": "./data/dataset_flat/train",
+    "VALIDATION_DATA_PATH": "./data/dataset_flat/val",
     "HYPERPARAMS_ID": "convAttenChannelExtractionG",
     "ARCHITECTURE_ID": "vit_256_channel_extraction",
     "LEARNING_RATE": 0.0001,
