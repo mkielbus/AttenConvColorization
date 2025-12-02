@@ -33,6 +33,13 @@ def parseCMDArgs():
         help="The number of the training process launch with the same hyperparams file (increase it for subsequent runs\
  with the same hyperparams file)."
     )
+    parser.add_argument(
+        "--cuda_device_id",
+        type=int,
+        required=False,
+        default=0,
+        help="The id of the cuda device to use."
+    )
     args = parser.parse_args()
     return args
 
@@ -197,8 +204,8 @@ def printFinalResults(result, metrics, config, optimizer):
 
 
 if __name__ == "__main__":
-    device = prepareDevice()
     args = parseCMDArgs()
+    device = prepareDevice(device_id=args.cuda_device_id)
 
     config = loadConfig(args.config)
 
