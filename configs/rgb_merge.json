@@ -31,7 +31,7 @@
     "RECON_WEIGHT": 0.1,
     "PERCEPTUAL_WEIGHT": 5.0,
     "USE_LPIPS": true,
-    "LPIPS_NET": "alex",
+    "LPIPS_NET": "vgg",
     "COLORFULNESS_WEIGHT": 0.005,
     "COLORFULNESS_TARGET": null,
     "TARGET_CHANNEL": "RGB",

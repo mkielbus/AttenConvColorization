@@ -30,7 +30,7 @@
     "RECON_WEIGHT": 0.1,
     "PERCEPTUAL_WEIGHT": 5.0,
     "USE_LPIPS": true,
-    "LPIPS_NET": "alex",
+    "LPIPS_NET": "vgg",
     "TARGET_CHANNEL": "R",
     "TARGET_OUTPUT_CHANNELS": 1
 }
