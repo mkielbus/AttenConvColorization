@@ -4,7 +4,7 @@ from pyaiwrap.loss import GeneratorColorizationLoss
 from pyaiwrap.metrics import GeneratorColorizationMetrics
 from pyaiwrap.control import GeneratorControlFunc
 from pyaiwrap.config import loadConfig
-from pyaiwrap.transforms import ChannelTransformCreator
+from pyaiwrap.transforms import ChannelTransformFactory
 from pyaiwrap.optimizers import createOptimizer
 from pyaiwrap.schedulers import createScheduler
 from pyaiwrap.utils import prepareDevice
@@ -81,10 +81,10 @@ def printTrainingConfiguration(config, launch_number):
 
 def createDataLoaders(config):
     """Create train and validation data loaders."""
-    transform_input = ChannelTransformCreator.getTransform(
+    transform_input = ChannelTransformFactory.getTransform(
         config["INPUT_CHANNEL"], config["IMAGE_RESIZE"], config["OUTPUT_CHANNELS"], is_input=True
     )
-    transform_target = ChannelTransformCreator.getTransform(
+    transform_target = ChannelTransformFactory.getTransform(
         config["TARGET_CHANNEL"], config["IMAGE_RESIZE"], config["TARGET_OUTPUT_CHANNELS"], is_input=False
     )
 
