@@ -2,7 +2,7 @@ from pyaiwrap.train import train
 from pyaiwrap.datasets import PairedImageFolder
 from pyaiwrap.loss import GeneratorColorizationLoss
 from pyaiwrap.metrics import GeneratorColorizationMetrics
-from pyaiwrap.control import GeneratorControlFunc
+from pyaiwrap.control import ControlFunctionFactory
 from pyaiwrap.config import loadConfig
 from pyaiwrap.transforms import ChannelTransformFactory
 from pyaiwrap.optimizers import createOptimizer
@@ -231,6 +231,10 @@ if __name__ == "__main__":
     loss_fn = createLossFunction(config, device)
     metrics = createMetrics(config)
 
+    control_fn = ControlFunctionFactory.createColorizationControl(
+            target_channel=config["TARGET_CHANNEL"],
+            input_channel=config["INPUT_CHANNEL"]
+    )
     print("Starting training...\n")
     result = train(
         models=models,
@@ -243,7 +247,7 @@ if __name__ == "__main__":
         device=device,
         num_epochs=config["EPOCHS"],
         diagrams_data_path=config["DIAGRAMS_DATA_PATH"],
-        hyperparams_id=config["HYPERPARAMS_ID"],
+        config_id=config["HYPERPARAMS_ID"],
         weights_path=config["WEIGHTS_PATH"],
         diagrams_path=config["DIAGRAMS_PATH"],
         launch_number=args.launch_number,
@@ -251,10 +255,7 @@ if __name__ == "__main__":
         max_patience=config["PATIENCE"],
         model_type="custom",
         gradient_clip=config["GRADIENT_CLIP"],
-        control_fn=GeneratorControlFunc(
-            target_channel=config["TARGET_CHANNEL"],
-            input_channel=config["INPUT_CHANNEL"]
-        ),
+        control_fn=control_fn,
         early_stopping_metric="total_loss"
     )
 
