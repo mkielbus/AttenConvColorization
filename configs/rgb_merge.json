@@ -1,5 +1,5 @@
 {
-    "BATCH_SIZE": 20,
+    "BATCH_SIZE": 16,
     "TRAIN_DATA_PATH": "./data/dataset_flat/train",
     "VALIDATION_DATA_PATH": "./data/dataset_flat/val",
     "HYPERPARAMS_ID": "rgb_merge_unet",
@@ -39,15 +39,15 @@
     "SUBMODULES": {
         "red_model": {
             "architecture_path": "./network_architectures/generators/vit_256_channel_extraction.json",
-            "weights_path": "./weights/custom_generator_hyperparams_convAttenChannelExtractionR.pth"
+            "weights_path": "./weights/best_performance_custom_generator_hyperparams_convAttenChannelExtractionR.pth"
         },
         "green_model": {
             "architecture_path": "./network_architectures/generators/vit_256_channel_extraction.json", 
-            "weights_path": "./weights/custom_generator_hyperparams_convAttenChannelExtractionG.pth"
+            "weights_path": "./weights/best_performance_custom_generator_hyperparams_convAttenChannelExtractionG.pth"
         },
         "blue_model": {
             "architecture_path": "./network_architectures/generators/vit_256_channel_extraction.json",
-            "weights_path": "./weights/custom_generator_hyperparams_convAttenChannelExtractionB.pth"
+            "weights_path": "./weights/best_performance_custom_generator_hyperparams_convAttenChannelExtractionB.pth"
         }
     }
 }
