@@ -105,7 +105,7 @@ def createDataLoaders(config):
         shuffle=True,
         drop_last=True,
         pin_memory=True,
-        num_workers=8
+        num_workers=2
     )
     validation_loader = DataLoader(
         validation_dataset,
@@ -113,7 +113,7 @@ def createDataLoaders(config):
         shuffle=False,
         drop_last=True,
         pin_memory=True,
-        num_workers=8
+        num_workers=2
     )
 
     return train_loader, validation_loader, len(train_dataset), len(validation_dataset)
