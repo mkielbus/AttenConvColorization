@@ -1,7 +1,7 @@
 {
     "BATCH_SIZE": 3,
-    "TRAIN_DATA_PATH": "./data/dataset_flat/train",
-    "VALIDATION_DATA_PATH": "./data/dataset_flat/val",
+    "TRAIN_DATA_PATH": "./data/dataset_flat_v2/train",
+    "VALIDATION_DATA_PATH": "./data/dataset_flat_v2/val",
     "HYPERPARAMS_ID": "convAttenChannelExtractionR",
     "ARCHITECTURE_ID": "vit_256_channel_extraction",
     "LEARNING_RATE": 0.0001,

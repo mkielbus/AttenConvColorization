@@ -1,7 +1,7 @@
 {
     "BATCH_SIZE": 2,
-    "TRAIN_DATA_PATH": "./data/dataset_flat/train",
-    "VALIDATION_DATA_PATH": "./data/dataset_flat/val",
+    "TRAIN_DATA_PATH": "./data/dataset_flat_v2/train",
+    "VALIDATION_DATA_PATH": "./data/dataset_flat_v2/val",
     "HYPERPARAMS_ID": "color_memory_transformer_full_colorization",
     "ARCHITECTURE_ID": "color_memory_transformer_v1",
     "LEARNING_RATE": 0.0001,

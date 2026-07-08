@@ -1,7 +1,7 @@
 {
     "BATCH_SIZE": 16,
-    "TRAIN_DATA_PATH": "./data/dataset_flat/train",
-    "VALIDATION_DATA_PATH": "./data/dataset_flat/val",
+    "TRAIN_DATA_PATH": "./data/dataset_flat_v2/train",
+    "VALIDATION_DATA_PATH": "./data/dataset_flat_v2/val",
     "HYPERPARAMS_ID": "rgb_merge_unet",
     "ARCHITECTURE_ID": "rgb_merge_unet",
     "LEARNING_RATE": 0.0001,
