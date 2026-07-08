@@ -1,5 +1,5 @@
 {
-    "BATCH_SIZE": 4,
+    "BATCH_SIZE": 3,
     "TRAIN_DATA_PATH": "./data/dataset_flat_v2/train",
     "VALIDATION_DATA_PATH": "./data/dataset_flat_v2/val",
     "HYPERPARAMS_ID": "convAttenChannelExtractionLabA",
