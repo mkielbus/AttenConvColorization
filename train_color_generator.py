@@ -57,7 +57,11 @@ def printTrainingConfiguration(config, launch_number):
     print(f"Batch Size: {config['BATCH_SIZE']}")
     print(f"Image Size: {config['IMAGE_RESIZE']}")
     print(f"Input Channel: {config['INPUT_CHANNEL']}")
-    print(f"Learning Rate: {config['LEARNING_RATE']}")
+    if config['SCHEDULER_TYPE'] == "polywarmup":
+        print(f"Learning Rate: {config['BASE_LR']} -> {config['FINAL_LR']} (polywarmup: linear warmup for "
+              f"{config['POLY_WARMUP_EPOCHS']} epochs, then poly decay; LEARNING_RATE is not used)")
+    else:
+        print(f"Learning Rate: {config['LEARNING_RATE']}")
     print(f"Epochs: {config['EPOCHS']}")
     print(f"Patience: {config['PATIENCE']}")
     print(f"Gradient Clip: {config['GRADIENT_CLIP']}")
