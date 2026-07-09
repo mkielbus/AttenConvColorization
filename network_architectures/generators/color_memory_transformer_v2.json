@@ -11,7 +11,7 @@
             "color_decoder_layers": 6,
             "memory_size": 128,
             "smoothing_config_path": "network_architectures/generators/smoothing_net_v2.json",
-            "encoder_config_path": "network_architectures/generators/luminance_encoder.json"
+            "encoder_config_path": "network_architectures/generators/luminance_encoder_v2.json"
         }
     }
 ]

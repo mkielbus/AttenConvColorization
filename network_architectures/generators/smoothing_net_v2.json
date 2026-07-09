@@ -4,8 +4,8 @@
         "params": {"in_channels": 128, "out_channels": 64, "kernel_size": 3, "stride": 1, "padding": 1}
     },
     {
-        "type": "BatchNorm2d",
-        "params": {"num_features": 64}
+        "type": "GroupNorm",
+        "params": {"num_groups": 4, "num_channels": 64}
     },
     {
         "type": "GELU",
@@ -16,15 +16,19 @@
         "params": {"in_channels": 64, "out_channels": 32, "kernel_size": 3, "stride": 1, "padding": 1}
     },
     {
-        "type": "BatchNorm2d",
-        "params": {"num_features": 32}
+        "type": "GroupNorm",
+        "params": {"num_groups": 4, "num_channels": 32}
     },
     {
         "type": "GELU",
         "params": {}
     },
     {
+        "type": "Upsample",
+        "params": {"scale_factor": 2, "mode": "bilinear", "align_corners": false}
+    },
+    {
         "type": "Conv2d",
-        "params": {"in_channels": 32, "out_channels": 2, "kernel_size": 1, "stride": 1, "padding": 0}
+        "params": {"in_channels": 32, "out_channels": 2, "kernel_size": 3, "stride": 1, "padding": 1}
     }
 ]
