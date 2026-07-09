@@ -1,0 +1,30 @@
+[
+    {
+        "type": "Conv2d",
+        "params": {"in_channels": 128, "out_channels": 64, "kernel_size": 3, "stride": 1, "padding": 1}
+    },
+    {
+        "type": "BatchNorm2d",
+        "params": {"num_features": 64}
+    },
+    {
+        "type": "GELU",
+        "params": {}
+    },
+    {
+        "type": "Conv2d",
+        "params": {"in_channels": 64, "out_channels": 32, "kernel_size": 3, "stride": 1, "padding": 1}
+    },
+    {
+        "type": "BatchNorm2d",
+        "params": {"num_features": 32}
+    },
+    {
+        "type": "GELU",
+        "params": {}
+    },
+    {
+        "type": "Conv2d",
+        "params": {"in_channels": 32, "out_channels": 2, "kernel_size": 1, "stride": 1, "padding": 0}
+    }
+]
