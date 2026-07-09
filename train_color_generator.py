@@ -111,7 +111,7 @@ def createDataLoaders(config):
         validation_dataset,
         batch_size=config["BATCH_SIZE"],
         shuffle=False,
-        drop_last=True,
+        drop_last=False,
         pin_memory=True,
         num_workers=2
     )
