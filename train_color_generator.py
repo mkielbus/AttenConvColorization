@@ -187,12 +187,12 @@ def printFinalResults(result, metrics, config, optimizer):
     print(f"  Val Total Loss: {history['val_total_loss'][-1]:.6f}")
     print(f"  Best Val Loss: {min(history['val_total_loss']):.6f}")
 
-    if config["PERCEPTUAL_WEIGHT"] > 0:
+    if "PERCEPTUAL_WEIGHT" in config.keys():
         print("\nPerceptual Loss:")
         print(f"  Train: {history['train_perceptual_loss'][-1]:.6f}")
         print(f"  Val: {history['val_perceptual_loss'][-1]:.6f}")
 
-    if config["COLORFULNESS_WEIGHT"] > 0:
+    if "COLORFULNESS_WEIGHT" in config.keys():
         print("\nColorfulness Metrics:")
         print(f"  Train Colorfulness Loss: {history['train_colorfulness_loss'][-1]:.6f}")
         print(f"  Val Colorfulness Loss: {history['val_colorfulness_loss'][-1]:.6f}")
