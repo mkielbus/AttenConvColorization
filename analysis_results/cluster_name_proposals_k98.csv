@@ -1,0 +1,99 @@
+cluster,size,preview,proposal_1,score_1,proposal_2,score_2,proposal_3,score_3,proposal_4,score_4,proposal_5,score_5,final_name
+0,449,cluster_previews_k98/cluster_000.png,meadow with flowers,0.2258,landscape painting,0.2229,dairy product,0.2184,river valley,0.2132,land vehicle,0.2122,a field ready for harvest on a sunny day
+1,394,cluster_previews_k98/cluster_001.png,tapestry,0.313,scarf,0.2794,curtain,0.2767,towel,0.267,brassiere,0.2499,fragments of traditional tapestries with red accents
+2,517,cluster_previews_k98/cluster_002.png,market square,0.2859,building,0.2807,street scene,0.2591,office building,0.2431,train station,0.2409,tenement blocks on a paved surface on a sunny day
+3,258,cluster_previews_k98/cluster_003.png,coin,0.2927,medal,0.2177,ruler,0.1911,coat of arms,0.1885,plate,0.1876,brownish coins against a dark blue background
+4,479,cluster_previews_k98/cluster_004.png,medal,0.2756,coat of arms,0.2425,coin,0.2358,belt,0.2291,plate,0.2214,a shiny metal emblem on a light-coloured background
+5,996,cluster_previews_k98/cluster_005.png,poster,0.346,propaganda poster,0.3223,athletics competition,0.2583,postcard,0.2527,billboard,0.2388,a colourful poster for a sporting event
+6,369,cluster_previews_k98/cluster_006.png,monastery,0.2928,building,0.2541,cathedral,0.2533,tower,0.2421,postcard,0.2355,the abbey set against a rural landscape on a sunny day
+7,516,cluster_previews_k98/cluster_007.png,clothing,0.3069,fashion accessory,0.2817,dress,0.2646,skirt,0.2583,brassiere,0.2574,clothing with a significant proportion of red
+8,281,cluster_previews_k98/cluster_008.png,ruler,0.2852,adhesive tape,0.2566,brassiere,0.2554,fashion accessory,0.2466,skirt,0.2445,a section of a tablecloth with an identification number underneath on a brown background
+9,578,cluster_previews_k98/cluster_009.png,table,0.2567,tapestry,0.2456,furniture,0.244,church interior,0.2411,cabinetry,0.2391,a well-lit exhibition of artworks
+10,1074,cluster_previews_k98/cluster_010.png,postcard,0.2646,envelope,0.2326,vehicle registration plate,0.2266,poster,0.2204,adhesive tape,0.215,pictures on small cards in cold colours
+11,369,cluster_previews_k98/cluster_011.png,trousers,0.2895,clothing,0.267,skirt,0.2519,suit,0.2515,belt,0.2413,elegant and dark suit trousers against a brown background
+12,412,cluster_previews_k98/cluster_012.png,river valley,0.2593,village houses,0.2586,monastery,0.2383,mountain landscape,0.2359,landscape painting,0.2333,a rural landscape on a slightly overcast day
+13,257,cluster_previews_k98/cluster_013.png,animal,0.2986,carnivore,0.2869,mammal,0.2727,bird specimen,0.2634,bird,0.2621,birds in the wild with a predominantly brown colouring
+14,399,cluster_previews_k98/cluster_014.png,postcard,0.3514,fountain,0.2547,swimming pool,0.2483,poster,0.2483,jacuzzi,0.2267,a waterside landscape on a sunny day with the greenery of trees and shrubs
+15,482,cluster_previews_k98/cluster_015.png,archaeological artifact,0.3273,nail (construction),0.2752,axe,0.2696,worm,0.2679,cookie,0.2673,rocks in earthy colours
+16,638,cluster_previews_k98/cluster_016.png,plate,0.2721,insect specimen,0.2619,invertebrate,0.2608,adhesive tape,0.2601,cheese,0.2581,yellowed squares with dark spots in the centre against a light background
+17,364,cluster_previews_k98/cluster_017.png,coal mine,0.2462,container,0.2432,land vehicle,0.2334,chainsaw,0.2314,tool,0.2313,an industrial vehicle in an old and overexposed photograph with noticeable cloud cover
+18,421,cluster_previews_k98/cluster_018.png,boat,0.3126,watercraft,0.298,barge,0.2866,harbor,0.2693,ship deck,0.2639,vessels in the harbour with cool colours predominating during the day
+19,339,cluster_previews_k98/cluster_019.png,fashion accessory,0.2915,belt,0.2824,helmet,0.2752,glove,0.2739,footwear,0.2738,foot and head accessories against a predominantly brown background
+20,454,cluster_previews_k98/cluster_020.png,building,0.2688,textile mill,0.2433,office building,0.2187,container,0.2128,train station,0.2124,a warehouse on a sunny day
+21,567,cluster_previews_k98/cluster_021.png,medal,0.2898,coat of arms,0.247,coin,0.2329,belt,0.2144,plate,0.2121,precious metal medals predominantly gold against a light background
+22,480,cluster_previews_k98/cluster_022.png,postcard,0.3355,monastery,0.2863,castle,0.2647,building,0.2439,village houses,0.2393,medieval buildings set against a natural background on a sunny day
+23,333,cluster_previews_k98/cluster_023.png,toy,0.3475,box,0.299,tool,0.2618,office supplies,0.2571,auto part,0.2514,old-fashioned boxes with parts to assemble
+24,761,cluster_previews_k98/cluster_024.png,poster,0.3786,propaganda poster,0.3498,postcard,0.3476,box,0.3385,envelope,0.3323,an old-fashioned cover for a product for sale or a book
+25,660,cluster_previews_k98/cluster_025.png,ruins,0.2828,building,0.273,monastery,0.2563,house,0.2543,textile mill,0.2493,ruined stone buildings on a sunny day
+26,294,cluster_previews_k98/cluster_026.png,portrait of a person,0.3231,oil painting,0.3128,bust,0.2789,person,0.2786,man,0.2776,browned portraits of the nobility in their ceremonial attire set in golden frames
+27,473,cluster_previews_k98/cluster_027.png,person,0.239,emigrants,0.221,postcard,0.2206,family photograph,0.2149,archaeological artifact,0.2143,rural activities involving villagers against a rural backdrop
+28,355,cluster_previews_k98/cluster_028.png,folk costume,0.2777,traditional dress,0.2562,emigrants,0.229,group portrait,0.2237,wedding photograph,0.2203,folk dances in traditional costumes
+29,611,cluster_previews_k98/cluster_029.png,poster,0.2914,tapestry,0.2809,book page,0.2765,book,0.2699,postcard,0.2681,the cover of a magazine or book or leaflet
+30,684,cluster_previews_k98/cluster_030.png,house,0.2699,building,0.2526,village houses,0.244,textile mill,0.2176,porch,0.2108,a little reddish cottage in the countryside amidst the grass by day
+31,397,cluster_previews_k98/cluster_031.png,window,0.2551,horizontal bar,0.2513,door,0.239,cabinetry,0.2367,building,0.235,a close-up view of the structural elements of the reddish-brown buildings
+32,189,cluster_previews_k98/cluster_032.png,postcard,0.336,monastery,0.2379,castle,0.2351,poster,0.233,river valley,0.2305,a painting depicting a modern city on a sunny day with hills in the background and lush greenery
+33,567,cluster_previews_k98/cluster_033.png,postcard,0.3351,market square,0.2731,monastery,0.2642,building,0.259,cathedral,0.2474,a painting depicting an inner-city park or garden on a sunny day in spring or summer
+34,299,cluster_previews_k98/cluster_034.png,coat,0.3193,jacket,0.3074,military uniform,0.3017,suit,0.2991,clothing,0.2832,the upper part of a dark or navy-blue uniform usually against a brownish background
+35,628,cluster_previews_k98/cluster_035.png,poster,0.3358,propaganda poster,0.2741,postcard,0.2718,athletics competition,0.2637,towel,0.2531,the world of professional sport on the cover or in a photograph
+36,326,cluster_previews_k98/cluster_036.png,postcard,0.3218,emigrants,0.3098,person,0.301,wedding photograph,0.2895,family photograph,0.288,a historical yellowed photograph showing people in everyday situations
+37,229,cluster_previews_k98/cluster_037.png,sailing ship,0.2974,oil painting,0.2771,boat,0.2755,warship,0.269,watercraft,0.2543,ships sailing across the sea as if viewed through a yellowish filter
+38,629,cluster_previews_k98/cluster_038.png,propaganda poster,0.333,poster,0.3244,postcard,0.311,newspaper page,0.2624,tapestry,0.2599,a hand-drawn illustration from a picture book
+39,445,cluster_previews_k98/cluster_039.png,forest,0.2586,landscape painting,0.2341,tree,0.2323,river valley,0.227,archaeological artifact,0.2231,grass and trees in the wild
+40,349,cluster_previews_k98/cluster_040.png,flowerpot,0.2902,plant,0.2635,flower,0.2576,vase,0.2465,postcard,0.2411,decorations made from fresh blooming flowers
+41,272,cluster_previews_k98/cluster_041.png,personal flotation device,0.2564,stretcher,0.2137,person,0.2011,paddle,0.1932,helmet,0.1908,people in overalls or spacesuits or rescue workers
+42,276,cluster_previews_k98/cluster_042.png,coin,0.2916,archaeological artifact,0.2126,ruler,0.2067,medal,0.2015,cookie,0.197,brownish coins bearing the likenesses of rulers usually against a green background
+43,378,cluster_previews_k98/cluster_043.png,crowd of people,0.2722,athletics competition,0.2579,horse race,0.2403,football match,0.2392,rowing boat race,0.2373,crowds of people gathering outdoors at folk festivals in sunny weather
+44,326,cluster_previews_k98/cluster_044.png,vase,0.3071,bowl,0.2915,pitcher (container),0.2903,ceramic vase,0.2895,tableware,0.2815,water storage containers
+45,233,cluster_previews_k98/cluster_045.png,bowl,0.262,picnic basket,0.2608,hat,0.2498,archaeological artifact,0.2448,fashion accessory,0.2435,wicker baskets against a dark background
+46,535,cluster_previews_k98/cluster_046.png,person,0.2941,man,0.2765,portrait of a person,0.2504,poster,0.2454,bust,0.2346,photos of people at work
+47,546,cluster_previews_k98/cluster_047.png,building,0.2939,house,0.2648,textile mill,0.261,train station,0.2588,office building,0.2522,Buildings in the countryside during the day
+48,431,cluster_previews_k98/cluster_048.png,paddle,0.3059,tool,0.3051,weapon,0.3025,chisel,0.3021,sword,0.3008,An oblong tool from the exhibition
+49,475,cluster_previews_k98/cluster_049.png,tool,0.2767,factory interior,0.2733,textile mill,0.2689,grinder,0.2639,spinning machine,0.2623,the industrial environment in the factory
+50,387,cluster_previews_k98/cluster_050.png,house,0.2941,building,0.2762,village houses,0.2467,office building,0.2321,porch,0.2207,residential building
+51,623,cluster_previews_k98/cluster_051.png,scarf,0.3117,tapestry,0.2957,towel,0.2771,fashion accessory,0.261,clothing,0.2584,long  patterned fabrics with a touch of red
+52,118,cluster_previews_k98/cluster_052.png,fashion model,0.2869,clothing,0.2434,dress,0.2271,evening gown,0.22,fashion accessory,0.2199,models on the catwalk in elegant outfits
+53,533,cluster_previews_k98/cluster_053.png,river valley,0.2342,paddle,0.2303,landscape painting,0.2246,watercraft,0.224,postcard,0.2221,water reservoirs set against a natural backdrop
+54,719,cluster_previews_k98/cluster_054.png,propaganda poster,0.3304,poster,0.3248,billboard,0.2294,postcard,0.2195,newspaper page,0.2156,teletext covers
+55,111,cluster_previews_k98/cluster_055.png,toy,0.2371,ship deck,0.2236,sailing ship,0.2192,gondola,0.2132,sculpture,0.212,the ornate stern of a late-medieval wooden ship
+56,438,cluster_previews_k98/cluster_056.png,tapestry,0.2926,scarf,0.2741,towel,0.255,curtain,0.2543,folk costume,0.2524,folk fabrics against a plain background
+57,337,cluster_previews_k98/cluster_057.png,archaeological artifact,0.321,vase,0.2919,ceramic vase,0.2913,jug,0.2871,pitcher (container),0.2833,an antique vase or other antique artefact
+58,304,cluster_previews_k98/cluster_058.png,crowd of people,0.2345,poster,0.2208,torch,0.2097,flag,0.207,market square,0.2067,street parade
+59,523,cluster_previews_k98/cluster_059.png,propaganda poster,0.3879,poster,0.3679,postcard,0.2968,towel,0.2663,athletics competition,0.2538,propaganda poster for the youth wing
+60,198,cluster_previews_k98/cluster_060.png,container,0.2957,truck,0.2652,train,0.2276,waste container,0.2271,barge,0.2206,area of heavy unloading
+61,244,cluster_previews_k98/cluster_061.png,archaeological artifact,0.2744,candy,0.2484,oyster,0.2424,invertebrate,0.2406,cookie,0.2405,a mineral set against an isolated background
+62,475,cluster_previews_k98/cluster_062.png,medal,0.3526,coin,0.2314,necklace,0.2294,belt,0.2201,weapon,0.2126,"a medal to be pinned on or hung around the neck, or a decoration on a separate background"
+63,316,cluster_previews_k98/cluster_063.png,poster,0.3758,propaganda poster,0.3639,newspaper page,0.2611,postcard,0.2565,billboard,0.24,the front page of a propaganda newspaper
+64,443,cluster_previews_k98/cluster_064.png,porch,0.2834,house,0.2695,window,0.2573,door,0.2551,cupboard,0.2305,a covered entrance to a rustic building
+65,441,cluster_previews_k98/cluster_065.png,flag,0.3092,scarf,0.2942,coat of arms,0.2917,towel,0.279,tapestry,0.2736,A triangular coat of arms or other symbol of the group
+66,700,cluster_previews_k98/cluster_066.png,poster,0.3034,propaganda poster,0.2997,book,0.271,book page,0.2547,postcard,0.2441,book cover
+67,150,cluster_previews_k98/cluster_067.png,traditional dress,0.2438,person,0.2207,folk costume,0.2171,woman,0.2015,girl,0.1978,a photograph of black people in their natural surroundings
+68,273,cluster_previews_k98/cluster_068.png,nail (construction),0.2067,building,0.2014,container,0.2004,tower,0.1993,horizontal bar,0.1971,construction or demolition site
+69,369,cluster_previews_k98/cluster_069.png,religious icon,0.3258,tapestry,0.297,oil painting,0.2519,poster,0.2495,coat of arms,0.2463,religious painting or sculpture
+70,203,cluster_previews_k98/cluster_070.png,picnic basket,0.297,fashion accessory,0.261,flowerpot,0.257,handbag,0.2508,archaeological artifact,0.2453,basket on the ground
+71,425,cluster_previews_k98/cluster_071.png,medal,0.3362,coat of arms,0.3095,coin,0.2647,plate,0.2618,belt,0.2601,gilded heraldic badges and shooting club emblems with inventory labels against a dark background
+72,95,cluster_previews_k98/cluster_072.png,poster,0.2646,propaganda poster,0.249,adhesive tape,0.247,tea,0.2428,box,0.2409,red tea packaging with yellow lettering photographed against a black background
+73,136,cluster_previews_k98/cluster_073.png,archaeological artifact,0.2766,earring,0.2408,herbarium sheet,0.2395,cookie,0.2352,jewellery,0.2348,crumpled fragments of gold foil beside a measuring scale on a black background
+74,365,cluster_previews_k98/cluster_074.png,tool,0.3116,box,0.2917,chime,0.2911,toy,0.289,ratchet (device),0.2883,antique wooden boxed instruments and cameras in warm brown tones
+75,156,cluster_previews_k98/cluster_075.png,insect specimen,0.2847,insect,0.268,butterfly,0.2447,moths and butterflies,0.2397,invertebrate,0.2316,moth specimens with spread wings against a light blue background
+76,327,cluster_previews_k98/cluster_076.png,snowmobile,0.2554,ski,0.2499,skiing,0.2368,snowplow,0.2368,snowboard,0.2364,snow-covered rural landscapes in the pink and violet hues of aged slides
+77,399,cluster_previews_k98/cluster_077.png,toy,0.3226,sculpture,0.2814,fashion accessory,0.278,archaeological artifact,0.2696,candy,0.2677,small folk figurines and carved curios often displayed on red fabric
+78,269,cluster_previews_k98/cluster_078.png,person,0.2253,gymnastics,0.218,poster,0.217,balance beam,0.2128,mirror,0.2092,children taking part in indoor workshops and games
+79,247,cluster_previews_k98/cluster_079.png,textile mill,0.2387,river valley,0.2204,building,0.2032,postcard,0.1892,village houses,0.1844,aerial views of towns and industrial estates amid green fields
+80,393,cluster_previews_k98/cluster_080.png,tapestry,0.2939,curtain,0.2651,scarf,0.2579,towel,0.2373,tie,0.2273,densely patterned floral fabric and wallpaper samples filling the whole frame
+81,189,cluster_previews_k98/cluster_081.png,bowl,0.3056,plate,0.3055,tableware,0.2969,saucer,0.2888,platter,0.2815,white plates with blue ornament on a tan background with inventory labels
+82,332,cluster_previews_k98/cluster_082.png,toy,0.3708,box,0.2354,tool,0.2335,doll,0.2306,scale,0.2293,colourful wooden toys on wheels with a small measuring tape for scale
+83,302,cluster_previews_k98/cluster_083.png,dress,0.3314,clothing,0.321,traditional dress,0.3052,evening gown,0.301,folk costume,0.2959,historical gowns on mannequins mostly in deep red against a dark backdrop
+84,391,cluster_previews_k98/cluster_084.png,postcard,0.2915,building,0.27,office building,0.2567,poster,0.2353,textile mill,0.2299,postcards of modernist hotels and apartment blocks under saturated blue skies
+85,450,cluster_previews_k98/cluster_085.png,flower,0.2825,plant,0.2752,meadow with flowers,0.2488,lavender (plant),0.2399,flowerpot,0.2333,close-ups of blue and pink wildflowers among dark green vegetation
+86,191,cluster_previews_k98/cluster_086.png,plant,0.2868,flower,0.2813,lavender (plant),0.2592,meadow with flowers,0.232,lily,0.2312,single small tundra flowers photographed close up against mossy ground
+87,165,cluster_previews_k98/cluster_087.png,monument,0.3306,statue,0.2737,sculpture,0.2692,bronze sculpture,0.2515,archaeological artifact,0.2452,gravestones and monuments on mowed green cemetery lawns
+88,309,cluster_previews_k98/cluster_088.png,table,0.2041,person,0.1998,poster,0.1939,group portrait,0.1933,crowd of people,0.192,groups of adults at indoor museum meetings and events
+89,475,cluster_previews_k98/cluster_089.png,cupboard,0.2806,chime,0.2706,box,0.2645,table,0.2619,furniture,0.2596,folk-painted wooden furniture and carved architectural details in warm interiors
+90,700,cluster_previews_k98/cluster_090.png,house,0.2727,village houses,0.2671,building,0.241,monastery,0.2271,textile mill,0.2221,red wooden country houses with white trim on green lawns on a sunny day
+91,518,cluster_previews_k98/cluster_091.png,table,0.2565,person,0.25,tapestry,0.2387,scale,0.2376,archaeological artifact,0.2365,handicraft workshops indoors in the warm dim colours of old slides
+92,377,cluster_previews_k98/cluster_092.png,coin,0.3291,medal,0.3008,plate,0.2344,ruler,0.221,coat of arms,0.2163,brownish copper coins with royal monograms beside a measuring scale
+93,599,cluster_previews_k98/cluster_093.png,poster,0.3265,propaganda poster,0.3157,postcard,0.295,envelope,0.2583,newspaper page,0.2567,printed German sports certificates and event announcements in muted colours
+94,362,cluster_previews_k98/cluster_094.png,jewellery,0.3044,earring,0.2908,fashion accessory,0.2784,necklace,0.2773,medal,0.2578,golden filigree jewellery and pendants against a dark or red background
+95,243,cluster_previews_k98/cluster_095.png,dairy product,0.2318,milk,0.2174,toilet paper,0.2152,textile mill,0.2081,barrel,0.2057,rows of white-wrapped silage bales on fields at dusk
+96,404,cluster_previews_k98/cluster_096.png,adhesive tape,0.3106,tool,0.3049,ruler,0.2958,box,0.2808,office supplies,0.2793,pinned insect specimens with paper labels against a bright blue background
+97,482,cluster_previews_k98/cluster_097.png,oil painting,0.3339,tapestry,0.3068,landscape painting,0.3019,still life painting,0.2929,poster,0.2518,naive framed paintings of red country houses among trees

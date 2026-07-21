@@ -4,7 +4,9 @@ from pyaiwrap.loss import GeneratorColorizationLoss
 from pyaiwrap.metrics import GeneratorColorizationMetrics
 from pyaiwrap.control import ControlFunctionFactory
 from pyaiwrap.config import loadConfig
-from pyaiwrap.transforms import ChannelTransformFactory
+from pyaiwrap.transforms import ChannelTransformFactory, createSharedGeometricAugmentation, \
+    createChromaJitter, ComposedTargetAugmentation
+from pyaiwrap.remap_augmentation import createClusterVersionRemapAugmentation
 from pyaiwrap.optimizers import createOptimizer
 from pyaiwrap.schedulers import createScheduler
 from pyaiwrap.utils import prepareDevice
@@ -83,6 +85,47 @@ def printTrainingConfiguration(config, launch_number):
             print("  Colorfulness Target: Match Original")
 
 
+def buildTargetAugmentation(config):
+    """Assemble the train-time, target-side augmentations (input stays pristine).
+
+    Chroma jitter (L5a) and the cluster-version remap (L5b) are independent and may be enabled
+    together; the remap runs first so the jitter scales whatever colours it produced. Returns
+    None when both are off, keeping the no-augmentation path byte-identical.
+    """
+    augmentations = []
+    if config.get("AUG_REMAP_P", 0.0) > 0.0:
+        if not config.get("AUGMENT", False):
+            # Target augmentations run after the shared geometric op. With AUGMENT on that op
+            # has already cropped to IMAGE_RESIZE, so the remap costs ~2 ms/sample; without it
+            # the remap runs on the full-resolution decode, measured ~92 ms/sample.
+            warnings.warn(
+                "AUG_REMAP_P > 0 with AUGMENT off: the remap will run on full-resolution images "
+                "(~10x slower per sample). Enable AUGMENT so it runs on the cropped image.",
+                RuntimeWarning
+            )
+        augmentations.append(createClusterVersionRemapAugmentation(
+            version_inventory_path=config["AUG_REMAP_VERSION_INVENTORY"],
+            color_sv_path=config["AUG_REMAP_COLOR_SV"],
+            image_versions_path=config["AUG_REMAP_IMAGE_VERSIONS"],
+            cluster_names_path=config.get("AUG_REMAP_CLUSTER_NAMES") or None,
+            probability=config["AUG_REMAP_P"],
+            freeze_threshold=config.get("AUG_REMAP_FREEZE_THRESHOLD"),
+            min_support=config.get("AUG_REMAP_MIN_SUPPORT")
+        ))
+    if config.get("AUG_CHROMA_P", 0.0) > 0.0:
+        augmentations.append(createChromaJitter(
+            probability=config["AUG_CHROMA_P"],
+            chroma_min=config["AUG_CHROMA_MIN"],
+            chroma_max=config["AUG_CHROMA_MAX"]
+        ))
+
+    if not augmentations:
+        return None
+    if len(augmentations) == 1:
+        return augmentations[0]
+    return ComposedTargetAugmentation(augmentations)
+
+
 def createDataLoaders(config):
     """Create train and validation data loaders."""
     transform_input = ChannelTransformFactory.getTransform(
@@ -92,10 +135,22 @@ def createDataLoaders(config):
         config["TARGET_CHANNEL"], config["IMAGE_RESIZE"], config["TARGET_OUTPUT_CHANNELS"], is_input=False
     )
 
+    shared_augmentation = None
+    if config.get("AUGMENT", False):
+        shared_augmentation = createSharedGeometricAugmentation(
+            config["IMAGE_RESIZE"],
+            flip_probability=config["AUG_FLIP_P"],
+            crop_scale_min=config["AUG_CROP_SCALE_MIN"]
+        )
+
+    target_augmentation = buildTargetAugmentation(config)
+
     train_dataset = PairedImageFolder(
         config["TRAIN_DATA_PATH"],
         input_transform=transform_input,
-        target_transform=transform_target
+        target_transform=transform_target,
+        shared_augmentation=shared_augmentation,
+        target_augmentation=target_augmentation
     )
     validation_dataset = PairedImageFolder(
         config["VALIDATION_DATA_PATH"],
