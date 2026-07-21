@@ -1,5 +1,6 @@
 {
     "BATCH_SIZE": 16,
+    "NUM_WORKERS": 8,
     "TRAIN_DATA_PATH": "./data/dataset_flat_v2/train",
     "VALIDATION_DATA_PATH": "./data/dataset_flat_v2/val",
     "HYPERPARAMS_ID": "color_memory_transformer_full_colorization_v3b",

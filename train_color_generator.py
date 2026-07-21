@@ -158,13 +158,15 @@ def createDataLoaders(config):
         target_transform=transform_target
     )
 
+    num_workers = config.get("NUM_WORKERS", 2)
+
     train_loader = DataLoader(
         train_dataset,
         batch_size=config["BATCH_SIZE"],
         shuffle=True,
         drop_last=True,
         pin_memory=True,
-        num_workers=2
+        num_workers=num_workers
     )
     validation_loader = DataLoader(
         validation_dataset,
@@ -172,7 +174,7 @@ def createDataLoaders(config):
         shuffle=False,
         drop_last=False,
         pin_memory=True,
-        num_workers=2
+        num_workers=num_workers
     )
 
     return train_loader, validation_loader, len(train_dataset), len(validation_dataset)
