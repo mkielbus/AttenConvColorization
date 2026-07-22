@@ -1,0 +1,20 @@
+{
+  "results_dir": "/mnt/d/Claude/analysis_results/phase2/union_artifacts",
+  "split_manifest": "/mnt/d/Claude/analysis_results/split_v3_manifest.csv",
+  "split_column": "split_v3",
+  "min_share": 0.1,
+  "k": 98,
+  "n_images": 80853,
+  "n_groups_total": 9952,
+  "coverage_ge10": {
+    "groups": 1981,
+    "images_covered": 58123
+  },
+  "coverage_ge30": {
+    "groups": 530,
+    "images_covered": 34382
+  },
+  "remap_eligible_images": 69561,
+  "remap_eligible_frac": 0.8603,
+  "conjunction_label_sets_ge30": 530
+}

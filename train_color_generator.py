@@ -217,7 +217,9 @@ def createLossFunction(config, device):
         lpips_net=config.get("LPIPS_NET", "alex"),
         device=device,
         target_channel=config["TARGET_CHANNEL"],
-        input_channel=config["INPUT_CHANNEL"]
+        input_channel=config["INPUT_CHANNEL"],
+        mixed_precision=config.get("MIXED_PRECISION", False),
+        mixed_precision_dtype=config.get("MIXED_PRECISION_DTYPE", "bfloat16")
     )
     return loss_fn
 
