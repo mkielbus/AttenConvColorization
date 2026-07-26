@@ -5,7 +5,6 @@
     "VALIDATION_DATA_PATH": "./data/dataset_flat_v3/val",
     "HYPERPARAMS_ID": "color_memory_transformer_full_colorization_v5",
     "ARCHITECTURE_ID": "color_memory_transformer_v5",
-    "LEARNING_RATE": 0.0001,
     "WEIGHT_DECAY": 0.05,
     "TRAINING_TYPE": "standard",
     "OPTIMIZER_TYPE": "adamw",
@@ -23,7 +22,7 @@
         "colorfulness"
     ],
     "B1": 0.9,
-    "B2": 0.99,
+    "B2": 0.999,
     "IMAGE_RESIZE": 256,
     "OUTPUT_CHANNELS": 1,
     "INPUT_CHANNEL": "luminance",
