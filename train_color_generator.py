@@ -11,6 +11,7 @@ from pyaiwrap.optimizers import createOptimizer
 from pyaiwrap.schedulers import createScheduler
 from pyaiwrap.utils import prepareDevice
 from pyaiwrap.generator import createGenerator
+from pyaiwrap.ema import WeightEma
 import torch.nn as nn
 from torch.utils.data import DataLoader
 import argparse
@@ -189,6 +190,17 @@ def createGeneratorModel(config, device):
     return generator, total_params, trainable_params
 
 
+def prepareEma(model, config):
+    """Create the weight EMA when enabled, else return None (raw-weight training)."""
+    if not config.get("USE_EMA", False):
+        return None
+    return WeightEma(
+        model,
+        decay=config["EMA_DECAY"],
+        warmup_updates=config["EMA_WARMUP_UPDATES"]
+    )
+
+
 def prepareOptimizer(model_parameters, config):
     """Create optimizer."""
     optimizer = createOptimizer(model_parameters, config)
@@ -283,6 +295,11 @@ if __name__ == "__main__":
     print(f"Total parameters: {total_params:,}")
     print(f"Trainable parameters: {trainable_params:,}\n")
 
+    generator_ema = prepareEma(generator, config)
+    ema = {'generator': generator_ema} if generator_ema is not None else None
+    if ema is not None:
+        print(f"EMA enabled: decay {config['EMA_DECAY']}, warmup {config['EMA_WARMUP_UPDATES']} updates\n")
+
     optimizer = prepareOptimizer(generator.parameters(), config)
     optimizers = {'generator': optimizer}
 
@@ -319,7 +336,8 @@ if __name__ == "__main__":
         model_type="custom",
         gradient_clip=config["GRADIENT_CLIP"],
         control_fn=control_fn,
-        early_stopping_metric="total_loss"
+        early_stopping_metric="total_loss",
+        ema=ema
     )
 
     printFinalResults(result, metrics, config, optimizers['generator'])
