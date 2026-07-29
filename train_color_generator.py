@@ -141,7 +141,9 @@ def createDataLoaders(config):
         shared_augmentation = createSharedGeometricAugmentation(
             config["IMAGE_RESIZE"],
             flip_probability=config["AUG_FLIP_P"],
-            crop_scale_min=config["AUG_CROP_SCALE_MIN"]
+            crop_scale_min=config["AUG_CROP_SCALE_MIN"],
+            ratio_min=config["AUG_RATIO_MIN"],
+            ratio_max=config["AUG_RATIO_MAX"]
         )
 
     target_augmentation = buildTargetAugmentation(config)

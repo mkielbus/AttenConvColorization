@@ -39,5 +39,7 @@
     "TARGET_OUTPUT_CHANNELS": 1,
     "AUGMENT": true,
     "AUG_FLIP_P": 0.5,
+    "AUG_RATIO_MIN": 0.85,
+    "AUG_RATIO_MAX": 1.18,
     "AUG_CROP_SCALE_MIN": 0.6
 }
