@@ -203,9 +203,9 @@ def prepareEma(model, config):
     )
 
 
-def prepareOptimizer(model_parameters, config):
-    """Create optimizer."""
-    optimizer = createOptimizer(model_parameters, config)
+def prepareOptimizer(model_or_parameters, config):
+    """Create optimizer. Pass the module to get weight-decay-free norm/bias/embedding groups."""
+    optimizer = createOptimizer(model_or_parameters, config)
     return optimizer
 
 
@@ -302,7 +302,9 @@ if __name__ == "__main__":
     if ema is not None:
         print(f"EMA enabled: decay {config['EMA_DECAY']}, warmup {config['EMA_WARMUP_UPDATES']} updates\n")
 
-    optimizer = prepareOptimizer(generator.parameters(), config)
+    # The module, not its parameters: AdamW then splits off norms, biases and embeddings
+    # into a weight-decay-free group.
+    optimizer = prepareOptimizer(generator, config)
     optimizers = {'generator': optimizer}
 
     scheduler = prepareScheduler(optimizer, config, len(train_loader))
