@@ -63,6 +63,12 @@ def printTrainingConfiguration(config, launch_number):
     if config['SCHEDULER_TYPE'] == "polywarmup":
         print(f"Learning Rate: {config['BASE_LR']} -> {config['FINAL_LR']} (polywarmup: linear warmup for "
               f"{config['POLY_WARMUP_EPOCHS']} epochs, then poly decay; LEARNING_RATE is not used)")
+    elif config['SCHEDULER_TYPE'] == "cosine_warmup":
+        # LEARNING_RATE is what AdamW is constructed with, but the scheduler overwrites it on
+        # step 0, so printing it would report a rate the run never uses.
+        print(f"Learning Rate: {config['BASE_LR']} -> {config['PEAK_LR']} -> {config['MIN_LR']} "
+              f"(cosine_warmup: linear warmup for {config['COSINE_WARMUP_EPOCHS']} epochs, then "
+              f"cosine decay; LEARNING_RATE is not used)")
     else:
         print(f"Learning Rate: {config['LEARNING_RATE']}")
     print(f"Epochs: {config['EPOCHS']}")
