@@ -5,7 +5,7 @@ from pyaiwrap.metrics import GeneratorColorizationMetrics
 from pyaiwrap.control import ControlFunctionFactory
 from pyaiwrap.config import loadConfig
 from pyaiwrap.transforms import ChannelTransformFactory, createSharedGeometricAugmentation, \
-    createChromaJitter, ComposedTargetAugmentation
+    createChromaJitter, createLumaJitter, ComposedTargetAugmentation
 from pyaiwrap.remap_augmentation import createClusterVersionRemapAugmentation
 from pyaiwrap.optimizers import createOptimizer
 from pyaiwrap.schedulers import createScheduler
@@ -127,6 +127,22 @@ def buildTargetAugmentation(config):
     return ComposedTargetAugmentation(augmentations)
 
 
+def buildInputAugmentation(config):
+    """Assemble the train-time, input-side augmentation (target stays pristine).
+
+    Returns None when disabled, keeping the no-augmentation path byte-identical.
+    """
+    if config.get("AUG_LUMA_P", 0.0) <= 0.0:
+        return None
+    return createLumaJitter(
+        probability=config["AUG_LUMA_P"],
+        gamma_min=config["AUG_LUMA_GAMMA_MIN"],
+        gamma_max=config["AUG_LUMA_GAMMA_MAX"],
+        contrast=config["AUG_LUMA_CONTRAST"],
+        brightness=config["AUG_LUMA_BRIGHTNESS"]
+    )
+
+
 def createDataLoaders(config):
     """Create train and validation data loaders."""
     transform_input = ChannelTransformFactory.getTransform(
@@ -147,13 +163,15 @@ def createDataLoaders(config):
         )
 
     target_augmentation = buildTargetAugmentation(config)
+    input_augmentation = buildInputAugmentation(config)
 
     train_dataset = PairedImageFolder(
         config["TRAIN_DATA_PATH"],
         input_transform=transform_input,
         target_transform=transform_target,
         shared_augmentation=shared_augmentation,
-        target_augmentation=target_augmentation
+        target_augmentation=target_augmentation,
+        input_augmentation=input_augmentation
     )
     validation_dataset = PairedImageFolder(
         config["VALIDATION_DATA_PATH"],
