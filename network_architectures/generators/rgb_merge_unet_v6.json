@@ -116,7 +116,8 @@
                 "out_channels": 128,
                 "output_stride": 8,
                 "norm_groups": 8
-            }
+            },
+            "semantic_input_channel": 0
         }
     }
 ]
