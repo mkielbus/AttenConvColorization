@@ -12,7 +12,11 @@
     "DATA_TYPE": "colorization",
     "OUTPUT_TYPE": "standard",
     "SCHEDULER_TYPE": "multi_step",
-    "LOSS_TYPES": ["reconstruction", "perceptual", "colorfulness"],
+    "LOSS_TYPES": [
+        "reconstruction",
+        "perceptual",
+        "colorfulness"
+    ],
     "B1": 0.9,
     "B2": 0.99,
     "DECAY_START_EPOCH": 40,
@@ -36,5 +40,6 @@
     "COLORFULNESS_TARGET": null,
     "TARGET_CHANNEL": "AB",
     "TARGET_OUTPUT_CHANNELS": 2,
+    "LUMINANCE_TRANSFER": "linear",
     "SUBMODULES": {}
 }

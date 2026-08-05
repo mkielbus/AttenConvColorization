@@ -41,5 +41,6 @@
     "COLORFULNESS_TARGET": null,
     "TARGET_CHANNEL": "AB",
     "TARGET_OUTPUT_CHANNELS": 2,
+    "LUMINANCE_TRANSFER": "linear",
     "SUBMODULES": {}
 }

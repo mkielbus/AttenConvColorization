@@ -257,7 +257,8 @@ def createLossFunction(config, device):
         target_channel=config["TARGET_CHANNEL"],
         input_channel=config["INPUT_CHANNEL"],
         mixed_precision=config.get("MIXED_PRECISION", False),
-        mixed_precision_dtype=config.get("MIXED_PRECISION_DTYPE", "bfloat16")
+        mixed_precision_dtype=config.get("MIXED_PRECISION_DTYPE", "bfloat16"),
+        luminance_transfer=config.get("LUMINANCE_TRANSFER", "srgb")
     )
     return loss_fn
 

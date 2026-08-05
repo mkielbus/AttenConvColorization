@@ -46,6 +46,7 @@
     "COLORFULNESS_TARGET": null,
     "TARGET_CHANNEL": "AB",
     "TARGET_OUTPUT_CHANNELS": 2,
+    "LUMINANCE_TRANSFER": "linear",
     "AUGMENT": true,
     "AUG_FLIP_P": 0.5,
     "AUG_RATIO_MIN": 0.85,
