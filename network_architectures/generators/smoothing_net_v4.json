@@ -1,0 +1,52 @@
+[
+    {
+        "type": "Conv2d",
+        "params": {
+            "in_channels": 128,
+            "out_channels": 64,
+            "kernel_size": 3,
+            "stride": 1,
+            "padding": 1
+        }
+    },
+    {
+        "type": "GroupNorm",
+        "params": {
+            "num_groups": 4,
+            "num_channels": 64
+        }
+    },
+    {
+        "type": "GELU",
+        "params": {}
+    },
+    {
+        "type": "Conv2d",
+        "params": {
+            "in_channels": 64,
+            "out_channels": 32,
+            "kernel_size": 3,
+            "stride": 1,
+            "padding": 1
+        }
+    },
+    {
+        "type": "GroupNorm",
+        "params": {
+            "num_groups": 4,
+            "num_channels": 32
+        }
+    },
+    {
+        "type": "GELU",
+        "params": {}
+    },
+    {
+        "type": "Upsample",
+        "params": {
+            "scale_factor": 2,
+            "mode": "bilinear",
+            "align_corners": false
+        }
+    }
+]

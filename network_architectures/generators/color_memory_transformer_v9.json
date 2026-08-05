@@ -10,7 +10,7 @@
             "dropout": 0.3,
             "color_decoder_layers": 6,
             "memory_size": 128,
-            "smoothing_config_path": "network_architectures/generators/smoothing_net_v3.json",
+            "smoothing_config_path": "network_architectures/generators/smoothing_net_v4.json",
             "pretrained_encoder": "convnext_small",
             "pretrained_encoder_stage_channels": [
                 96,
@@ -21,6 +21,13 @@
             "cluster_color_prior": {
                 "num_clusters": 98,
                 "tables_path": "./analysis_results/cluster_color_prior_k98.pt"
+            },
+            "quantized_chroma_head": {
+                "in_channels": 32,
+                "num_bins": 211,
+                "temperature": 0.38,
+                "rebalance_lambda": 0.5,
+                "bins_path": "./analysis_results/chroma_bins_ab10.pt"
             }
         }
     }

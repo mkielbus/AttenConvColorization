@@ -258,7 +258,8 @@ def createLossFunction(config, device):
         input_channel=config["INPUT_CHANNEL"],
         mixed_precision=config.get("MIXED_PRECISION", False),
         mixed_precision_dtype=config.get("MIXED_PRECISION_DTYPE", "bfloat16"),
-        luminance_transfer=config.get("LUMINANCE_TRANSFER", "srgb")
+        luminance_transfer=config.get("LUMINANCE_TRANSFER", "srgb"),
+        classification_weight=config.get("CLASSIFICATION_WEIGHT", 0.0)
     )
     return loss_fn
 
@@ -267,7 +268,9 @@ def createMetrics(config):
     """Create metrics object."""
     metrics = GeneratorColorizationMetrics(
         use_colorfulness=config.get("COLORFULNESS_WEIGHT", 0.0) > 0,
-        use_perceptual_loss=config.get("PERCEPTUAL_WEIGHT", 0.0) > 0
+        use_perceptual_loss=config.get("PERCEPTUAL_WEIGHT", 0.0) > 0,
+        track_gradient_norm=config.get("GRADIENT_CLIP") is not None,
+        use_classification=config.get("CLASSIFICATION_WEIGHT", 0.0) > 0
     )
     return metrics
 
