@@ -5,7 +5,8 @@ from pyaiwrap.metrics import GeneratorColorizationMetrics
 from pyaiwrap.control import ControlFunctionFactory
 from pyaiwrap.config import loadConfig
 from pyaiwrap.transforms import ChannelTransformFactory, createSharedGeometricAugmentation, \
-    createChromaJitter, createLumaJitter, ComposedTargetAugmentation
+    createPairedGeometricAugmentation, createChromaJitter, createLumaJitter, ComposedTargetAugmentation
+from pyaiwrap.segmentation_masks import createSegmentationMaskEncoder
 from pyaiwrap.remap_augmentation import createClusterVersionRemapAugmentation
 from pyaiwrap.optimizers import createOptimizer
 from pyaiwrap.schedulers import createScheduler
@@ -60,6 +61,10 @@ def printTrainingConfiguration(config, launch_number):
     print(f"Batch Size: {config['BATCH_SIZE']}")
     print(f"Image Size: {config['IMAGE_RESIZE']}")
     print(f"Input Channel: {config['INPUT_CHANNEL']}")
+    if config.get("TRAIN_MASK_PATH"):
+        mask_encoder = buildMaskEncoder(config)
+        print(f"Segmentation Masks: {config['TRAIN_MASK_PATH']} "
+              f"({config['MASK_ENCODING']}, +{mask_encoder.channels} input channels)")
     if config['SCHEDULER_TYPE'] == "polywarmup":
         print(f"Learning Rate: {config['BASE_LR']} -> {config['FINAL_LR']} (polywarmup: linear warmup for "
               f"{config['POLY_WARMUP_EPOCHS']} epochs, then poly decay; LEARNING_RATE is not used)")
@@ -149,6 +154,62 @@ def buildInputAugmentation(config):
     )
 
 
+def buildGeometricAugmentation(config, masks_enabled):
+    """Assemble the train-time paired geometric augmentation (flip + random resized crop).
+
+    With masks on, the label map has to receive the same flip and the same crop box as the
+    image, so the augmentation must expose its draw instead of sampling it inside __call__.
+    Without masks the historical composed transform is used unchanged, so runs configured
+    before any of this keep consuming the RNG exactly as they did.
+    """
+    if not config.get("AUGMENT", False):
+        return None
+
+    if masks_enabled:
+        if config["AUG_RATIO_MIN"] is not None or config["AUG_RATIO_MAX"] is not None:
+            raise ValueError(
+                "AUG_RATIO_MIN/AUG_RATIO_MAX are the legacy aspect-ratio band and are not "
+                "supported alongside segmentation masks; leave both null."
+            )
+        return createPairedGeometricAugmentation(
+            config["IMAGE_RESIZE"],
+            flip_probability=config["AUG_FLIP_P"],
+            crop_scale_min=config["AUG_CROP_SCALE_MIN"]
+        )
+
+    return createSharedGeometricAugmentation(
+        config["IMAGE_RESIZE"],
+        flip_probability=config["AUG_FLIP_P"],
+        crop_scale_min=config["AUG_CROP_SCALE_MIN"],
+        ratio_min=config["AUG_RATIO_MIN"],
+        ratio_max=config["AUG_RATIO_MAX"]
+    )
+
+
+def buildMaskEncoder(config):
+    """Build the segmentation-mask encoder, or None when the run has no masks.
+
+    Masks are keyed off TRAIN_MASK_PATH; a train path without a validation one is rejected
+    rather than silently training a conditioned model that is then validated unconditioned.
+    """
+    train_mask_path = config.get("TRAIN_MASK_PATH")
+    validation_mask_path = config.get("VALIDATION_MASK_PATH")
+    if not train_mask_path and not validation_mask_path:
+        return None
+    if not train_mask_path or not validation_mask_path:
+        raise ValueError(
+            "TRAIN_MASK_PATH and VALIDATION_MASK_PATH must be set together: validation has to "
+            "condition the model exactly as training does, or its loss measures another model."
+        )
+
+    return createSegmentationMaskEncoder(
+        encoding=config["MASK_ENCODING"],
+        boundary_width=config["MASK_BOUNDARY_WIDTH"],
+        hash_channels=config["MASK_HASH_CHANNELS"],
+        randomize_hash=config["MASK_RANDOMIZE_HASH"]
+    )
+
+
 def createDataLoaders(config):
     """Create train and validation data loaders."""
     transform_input = ChannelTransformFactory.getTransform(
@@ -158,15 +219,8 @@ def createDataLoaders(config):
         config["TARGET_CHANNEL"], config["IMAGE_RESIZE"], config["TARGET_OUTPUT_CHANNELS"], is_input=False
     )
 
-    shared_augmentation = None
-    if config.get("AUGMENT", False):
-        shared_augmentation = createSharedGeometricAugmentation(
-            config["IMAGE_RESIZE"],
-            flip_probability=config["AUG_FLIP_P"],
-            crop_scale_min=config["AUG_CROP_SCALE_MIN"],
-            ratio_min=config["AUG_RATIO_MIN"],
-            ratio_max=config["AUG_RATIO_MAX"]
-        )
+    mask_encoder = buildMaskEncoder(config)
+    shared_augmentation = buildGeometricAugmentation(config, masks_enabled=mask_encoder is not None)
 
     target_augmentation = buildTargetAugmentation(config)
     input_augmentation = buildInputAugmentation(config)
@@ -177,12 +231,18 @@ def createDataLoaders(config):
         target_transform=transform_target,
         shared_augmentation=shared_augmentation,
         target_augmentation=target_augmentation,
-        input_augmentation=input_augmentation
+        input_augmentation=input_augmentation,
+        mask_folder_path=config.get("TRAIN_MASK_PATH") or None,
+        mask_encoder=mask_encoder,
+        image_size=config["IMAGE_RESIZE"]
     )
     validation_dataset = PairedImageFolder(
         config["VALIDATION_DATA_PATH"],
         input_transform=transform_input,
-        target_transform=transform_target
+        target_transform=transform_target,
+        mask_folder_path=config.get("VALIDATION_MASK_PATH") or None,
+        mask_encoder=mask_encoder,
+        image_size=config["IMAGE_RESIZE"]
     )
 
     num_workers = config.get("NUM_WORKERS", 2)
